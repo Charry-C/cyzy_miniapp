@@ -12,10 +12,10 @@ import {ref,computed} from 'vue'
 
 
 let step=ref(1)
-// let a=ref(0)
-// setInterval(()=>{
-// 	a.value++
-// },20)
+let a=ref(0)
+setInterval(()=>{
+	a.value++
+},20)
 
 const goNext=()=>{
 	// a.value+=10
