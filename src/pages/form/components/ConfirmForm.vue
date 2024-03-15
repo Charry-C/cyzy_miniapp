@@ -1,145 +1,106 @@
 <script setup>
 //
-import Item from './Item.vue';
-const data=[
-    {
-        title:"招募类型",
-        value:"社团招募"
-    },
-    {
-        title:"社团名称",
-        value:"数学建模研究社"
-    },
-    {
-        title:"学生认证",
-        value:true
-    },
-    {
-        title:"社团部门介绍",
-        value:[
-        {   
-            title:"外联部",
-            value:"外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部"
-        },
-        {   
-            title:"宣传部",
-            value:"宣传部宣传部宣传部宣传部宣传部宣传部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部"
-        },
-        {   
-            title:"学术部",
-            value:"学术部学术部学术部学术部学术部学术部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部外联部"
-        },
-        ]
-    },
-    {
-        title:"选择标签",
-        value:["免早","积累经验","学习技能"]
-    },
-    {
-        title:"招募校区",
-        value:"佛山校区"
-    },
-    {
-        title:"时间范围",
-        value:
-        [
-            {
-                title:"开始时间",
-                value:"2024-03-10"
-            },
-            {
-                title:"结束时间",
-                value:"2024-05-10"
-            }
-        ]
-    },
-    {
-        title:"社团图片",
-        value:[
-            {
-                title:"招募二维码",
-                value:["二维码"],
-            
-            },
-            {
-                title:"社团相册",
-                value:["照片1","照片2"]
-            }
-        ]
-    },
+import {ref } from 'vue'
+import { useFormStore } from '@/stores/modules/formInfo';
+const formData=useFormStore().formData
+import '@/static/cssStyle/iconfont.css'
 
-    ]
-// type:{
-//         title:"招募类型",
-//         value:"社团招募"
-//     },
-//     orgName:{
-//         title:"社团名称",
-//         value:"数学建模研究社"
-//     },
-//     stuAuth:{
-//         title:"学生认证",
-//         value:true
-//     },
-//     departInfo:{
-//         title:"社团部门介绍",
-//         value:[
-//         {   
-//             title:"外联部",
-//             value:"外联部外联部外联部外联部外联部外联部"
-//         },
-//         {   
-//             title:"宣传部",
-//             value:"宣传部宣传部宣传部宣传部宣传部宣传部"
-//         },
-//         {   
-//             title:"学术部",
-//             value:"学术部学术部学术部学术部学术部学术部"
-//         },
-//     ]
-//     },
-//     selectedTag:{
-//         title:"选择标签",
-//         value:["免早","积累经验","学习技能"]
-//     },
-//     location:{
-//         title:"招募校区",
-//         value:"佛山校区"
-//     },
-//     rangeTime:{
-//         title:"时间范围",
-//         value:
-//         [
-//             {
-//                 title:"开始时间",
-//                 value:"2024-03-10"
-//             },
-//             {
-//                 title:"结束时间",
-//                 value:"2024-05-10"
-//             }
-//         ]
-//     },
-//     Img:{
-//         title:"社团图片",
-//         value:[
-//         {
-//             title:"招募二维码",
-//             value:["二维码"],
-//         },
-//         {
-//             title:"社团相册",
-//             value:["照片1","照片2"]
-//         }
-//     ]
-//     },
+const editIcon=ref('iconfont icon-edit')
 </script>
 
 <template>
   <view class="confirm-form">
-    <view class="info-box" v-for="(item,index) in data" :key="index">
-        <item :item="item"/>
-        <view class="edit"></view>
+    <view class="info-box">
+        <view class="form-item">
+            <view class="title">
+                招募类型
+            </view>
+            <view class="value">
+                {{ formData.recruitmentType }}
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                社团名称
+            </view>
+            <view class="value">
+                {{ formData.clubName }}
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                招聘部门
+            </view>
+            <view class="value">
+                <template v-for="(item,index) in formData.clubDescription" :key="index">
+                    <view class="form-item-title">{{ item.department }}</view>
+                    <view class="form-item-value">{{ item.description }}</view>
+                </template>
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                社团标签
+            </view>
+            <view class="value">
+                <view class="tag" v-for="(tag,index) in formData.tags" :key="index">{{ tag }}</view>
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                招聘校区
+            </view>
+            <view class="value">
+                {{ formData.recruitmentCampus }}
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                招募时间
+            </view>
+            <view class="value">
+                <view class="time">
+                    <view class="form-item-title">开始时间</view>
+                    <view class="form-item-value">{{ formData.recruitmentPeriod.startDate }}</view>    
+                </view>
+                <view class="time">
+                    <view class="form-item-title">结束时间</view>
+                    <view class="form-item-value">{{ formData.recruitmentPeriod.endDate }}</view>    
+                </view>
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                联系方式
+            </view>
+            <view class="value">
+                <view class="contact">
+                    <view class="form-item-title">微信号</view>
+                    <view class="form-item-value">{{ formData.recruitmentContact.wechatID }}</view>
+                </view>
+                <view class="contact">
+                    <view class="form-item-title">群二维码</view>
+                    <view class="form-item-value" v-for="(img,index) in formData.recruitmentContact.groupQRCode" :key="index">{{ img }}</view>
+                </view>
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        <view class="form-item">
+            <view class="title">
+                社团相册
+            </view>
+            <view class="value">
+                <view class="album" v-for="(img,index) in formData.clubAlbum" :key="index">{{ img }}</view>
+            </view>
+            <view class="edit" :class="editIcon"></view>
+        </view>
+        
     </view>
   </view>
 </template>
@@ -149,12 +110,16 @@ const data=[
     margin: 0 3vw;
     border-radius: 5vw;
     border: 0.1vw solid #ececec;
-    .info-box{
+    .form-item{
         position: relative;
         border-bottom: 0.1vw solid #ccc;
         padding: 5vw 5vw 3vw 5vw;
         &:nth-last-child(1){
             border: none;
+        }
+        .form-item-title{
+            font-weight: bolder;
+            font-size: 4vw;
         }
         .edit{
             position: absolute;
@@ -164,7 +129,10 @@ const data=[
             border-radius: 50%;
             right: 2vw;
             top: 4vw;
-            
+            text-align: center;
+            line-height: 7vw;
+            color: white;
+            font-weight: bold;
         }
     }
     .title{

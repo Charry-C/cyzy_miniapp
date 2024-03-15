@@ -7,19 +7,62 @@ import CampusSelect from './components/CampusSelect.vue';
 import TimeSelect from './components/TimeSelect.vue';
 import UploadPic from './components/UploadPic.vue';
 import ConfirmForm from './components/ConfirmForm.vue'
+import Contact from './components/Contact.vue';
+import {ref,reactive,computed} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo.js'
 
-import {ref,computed} from 'vue'
 
+//# utils-->pinia FormStore
+const formStore=useFormStore()
+console.log("111",formStore.formData);
 
+//# region variate
 let step=ref(1)
-let a=ref(0)
-setInterval(()=>{
-	a.value++
-},20)
+let stepSum=ref(9)
+let allowList=reactive([
+	{
+		step:1,
+		allowNext:false
+	},
+	{
+		step:2,
+		allowNext:false
+	},
+	{
+		step:3,
+		allowNext:false
+	},
+	{
+		step:4,
+		allowNext:false
+	},
+	{
+		step:5,
+		allowNext:false
+	},
+	{
+		step:6,
+		allowNext:true
+	},
+	{
+		step:7,
+		allowNext:false
+	},
+	{
+		step:8,
+		allowNext:true
+	},
+	{
+		step:9,
+		allowNext:true
+	},
+])
+//# endregion variate
 
+
+//# region method
 const goNext=()=>{
-	// a.value+=10
-	if(step.value%8==0){
+	if(step.value%stepSum.value==0){
 		step.value=1
 	}else{
 		step.value = step.value+1;
@@ -28,16 +71,25 @@ const goNext=()=>{
 
 const goBack=()=>{
 	if(step.value==1){
-		step.value=8
+		step.value=stepSum.value
 	}else{
 		step.value = step.value-1;
 	}
 }
 
 
-let isallow=computed(()=>{
+const isAllow=(value)=>{
+	console.log('get-allow',value);
+	allowList[step.value-1].allowNext=value
+}
 
-})
+//# endregion method
+
+
+//# region computed
+
+
+//# endregion computed
 
 
 </script>
@@ -46,46 +98,31 @@ let isallow=computed(()=>{
 	<view class="form">
 		<view class="top">
 		<view class="step">
-			{{step}}/8
+			{{step}}/{{stepSum}}
 		</view>
 		<view class="kind">招募发布</view>
 	</view>
 	
 	<view class="form-con">
-		<template v-if="step===1">
-  			<KindSelect />
-		</template>
-		<template v-if="step===2">
-			<TitleForm />
-		</template>
-		<template v-if="step===3">
-			<RecruitDep />
-		</template>
-		<template v-if="step===4">
-			<TagSelect />
-		</template>
-		<template v-if="step===5">
-			<CampusSelect />
-		</template>
-		<template v-if="step===6">
-			<TimeSelect />
-		</template>
-		<template v-if="step===7">
-			<UploadPic />
-		</template>
-		<template v-if="step===8">
-			<ConfirmForm />
-		</template>
+  			<KindSelect @get-allow="isAllow" v-if="step===1"/>
+			<TitleForm @get-allow="isAllow" v-if="step===2"/>
+			<RecruitDep @get-allow="isAllow"  v-if="step===3"/>
+			<TagSelect @get-allow="isAllow" v-if="step===4"/>
+			<CampusSelect @get-allow="isAllow" v-if="step===5"/>
+			<TimeSelect @get-allow="isAllow" v-if="step===6"/>
+			<Contact @get-allow="isAllow" v-if="step===7"/>
+			<UploadPic @get-allow="isAllow" v-if="step===8"/>
+			<ConfirmForm @get-allow="isAllow" v-if="step===9"/>
 	</view>
 
 
 	<view class="bottom-step">
 		<view class="step-prog">
-			<progress class="progress" :percent="step/8*100"  activeColor="#14a800" stroke-width="3" active="true" active-mode="forwards" duration="10"  />
+			<progress class="progress" :percent="step/stepSum*100"  activeColor="#14a800" stroke-width="3" active="true" active-mode="forwards" duration="10"  />
 		</view>
 		<view class="step-box">
-			<view class="back bottom-btn" @click="goBack">BACK</view>
-			<view class="next bottom-btn" @click="goNext">NEXT</view>
+			<view class="back bottom-btn" :style="{'visibility': step === 1 ? 'hidden' : 'visible'}" @click="goBack">BACK</view>
+			<view class="next bottom-btn" @click="goNext" :class="{'disabled':!allowList[step-1].allowNext}">NEXT</view>
 		</view>
 	</view>
 	</view>
@@ -138,6 +175,9 @@ let isallow=computed(()=>{
 			.next{
 				color: #fff;
 				background-color: green;
+			}
+			.disabled{
+				background-color: rgb(168, 168, 168);
 			}
 		}
 	}

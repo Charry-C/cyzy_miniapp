@@ -1,4 +1,4 @@
-<script setup lang="ts">
+<script setup>
 import { useMemberStore } from '@/stores/modules/member'
 import '@/utils/http'
 import {http} from '@/utils/http'

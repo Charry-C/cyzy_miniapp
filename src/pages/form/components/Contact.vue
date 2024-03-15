@@ -1,7 +1,15 @@
 <script setup>
 //
-import {ref,reactive} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo'
+import {ref,reactive,onMounted} from 'vue'
+const emit=defineEmits(['get-allow'])
+const formData=useFormStore().formData
+
+
 let imageValue=reactive([])
+let contact=ref('')
+
+
 const listStyle=reactive({
 	"height": 100,	// 边框高度
 	"width": 100,	// 边框宽度
@@ -50,14 +58,39 @@ const listStyle=reactive({
             }
         })
     }
+
+
+    //表单处理逻辑
+    const checkContact=()=>{
+        console.log("contact.value",contact.value);
+        if(contact.value.length>0 ){
+        formData.recruitmentContact.wechatID=contact.value
+        emit('get-allow',true)
+    }else if(contact.value.length>=20){
+        formData.recruitmentContact.wechatID=''
+        emit('get-allow',false)
+    }else{
+        formData.recruitmentContact.wechatID=''
+        emit('get-allow',false)
+    }
+    }
+
+
 //endregion method
+    onMounted(()=>{
+        if(formData.recruitmentContact.wechatID!==''){
+            contact.value=formData.recruitmentContact.wechatID
+        }
+        checkContact()
+    })
 </script>
 
 <template>
-    <view class="upload-pic">
-        <view class="tip">还可以上传社团相册呀~</view>
-        
-        <view class="upload-info">
+  <view class="contact-form">
+    <view class="tip">请提供联系方式</view>
+    <input class="uni-input" placeholder="请您的微信号/手机号" v-model="contact" @input="checkContact"/>
+    <view class="upload-info">
+        <view class="small-tip">上传群二维码</view>
             <uni-file-picker 
             v-model="imageValue" 
             fileMediatype="image"
@@ -69,34 +102,33 @@ const listStyle=reactive({
             @fail="fail" 
             />
         </view>
-    </view>
+  </view>
 </template>
 
+
+
 <style lang="scss">
-//
-.upload-pic{
-    padding: 3vw;
+.contact-form{
+    padding: 0 3vw;
     .tip{
-        text-align: center;
         font-size: 6vw;
-        margin: 5vw;
+        margin: 10vw 0;
+        text-align: center;
     }
-        .small-tip{
-            font-size: 4vw;
-            font-weight: bold;
-            background-color: rgb(247, 250, 247);
-            padding: 4vw 5vw;
-            border-radius: 2vw;
-            margin: 2vw 5vw;
-            text-align: center;
-        }
+    .uni-input{
+        height: 6vh;
+        line-height: 6.5vh;
+        padding: 0 2vw;
+        font-size: 3.5vw;
+        border: 0.5vw solid #ccc;
+        border-radius: 1vw;
+    }
     .upload-info{
-        margin: 3vw 0;
-        
+        margin-top: 5vh;
+        .small-tip{
+            margin-bottom: 3vh;
+        }
     }
 }
-
-
-
 
 </style>

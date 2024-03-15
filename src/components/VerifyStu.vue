@@ -1,5 +1,18 @@
-<script setup lang="ts">
-//
+<script setup>
+import {ref} from 'vue'
+let verify=ref(false)
+
+const submit=()=>{
+    uni.vibrateShort()
+    if(verify.value){
+        uni.navigateTo({url:'../form/form'})
+    }else{
+        setTimeout(()=>{
+            verify.value=true
+            uni.navigateTo({ url:'../form/form'})
+        },100)
+    }
+}
 </script>
 
 <template>
@@ -14,32 +27,31 @@
             <input class="uni-input"  placeholder="请填写您的手机号" />
         </view>
         <view class="verify-info">
-            <button class="submit">
+            <button class="submit" @click="submit">
                 提交认证
             </button>
-            <view class="state">
-                未通过
-                <!-- 未成功
-                已通过 -->
+            <view class="state" :class="{'acitve':verify}">
+                {{verify==true?"已通过":"未通过"}}
             </view>
         </view>
   </view>
 </template>
 
 <style lang="scss">
+
 .verify-stu{
+    padding:8vw 5vw;
     .tip{
         font-size: 5vw;
         font-weight: bold;
         margin: 4vw 0;
     }
-    padding: 0 3vw;
     .small-tip{
         font-size: 3.5vw;
         margin-bottom: 5vw;
     }
     .stu-form{
-        margin-bottom: 5vw;
+        margin-bottom: 10vw;
         .uni-input{
         margin: 3vw 0;
         height: 6vh;
@@ -69,6 +81,9 @@
             color: #fff;
             padding: 1vw 2vw;
             border-radius: 1vw;
+        }
+        .acitve{
+        background-color: rgb(10, 207, 10);
         }
 
     }

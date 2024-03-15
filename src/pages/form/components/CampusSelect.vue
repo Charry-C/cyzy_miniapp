@@ -1,6 +1,11 @@
 <script setup>
 //
-import {ref} from 'vue'
+import {ref,reactive,onMounted,defineEmits} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo'
+
+const emit=defineEmits(['get-allow'])
+const formData=useFormStore().formData
+
 
 /**
  * 0：都没选
@@ -11,10 +16,42 @@ import {ref} from 'vue'
 const kindSelect=ref(0)
 
 const selectBox=(select)=>{
-    console.log(select);
     kindSelect.value=select
+    transform(1)
+    emit('get-allow',true)
     uni.vibrateShort()
 }
+
+const transform=(mode)=>{
+    if(mode==1){
+        if(kindSelect.value==1){
+        formData.recruitmentCampus='佛山校区'
+        }else if(kindSelect.value==2){
+        formData.recruitmentCampus='广州校区'
+        }else if(kindSelect.value==3){
+        formData.recruitmentCampus='校区不限'
+        }
+    }else{
+        if(formData.recruitmentCampus=='佛山校区'){
+            kindSelect.value=1
+        }else if(formData.recruitmentCampus=='广州校区'){
+            kindSelect.value=2
+        }else if(formData.recruitmentCampus=='校区不限'){
+            kindSelect.value=3
+        }
+    }
+}
+
+onMounted(()=>{
+    console.log("校区选择组件被挂在了");
+    if(formData.recruitmentCampus){
+        transform(2)
+        emit('get-allow',true)
+    }else{
+        emit('get-allow',false)
+    }
+})
+
 </script>
 
 <template>

@@ -1,5 +1,8 @@
 <script setup>
-import {ref,reactive,computed,nextTick} from 'vue'
+import {ref,reactive,computed,nextTick,onMounted} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo'
+
+const formData=useFormStore().formData
 
 const getDate = (type) => {
     const date = new Date()
@@ -42,14 +45,17 @@ const bindDateChange = (e,type,value) => {
 
     if(type=='start' && judgeTime(e.detail.value,end.value)){
         date.value = e.detail.value
+        formData.recruitmentPeriod.startDate=date.value
         return
     }
     if(type=='end' && judgeTime(date.value,e.detail.value)){
         console.log(typeof date.value);
         end.value=e.detail.value
+        formData.recruitmentPeriod.endDate=end.value
         return
     }
 
+    //验证
     if (type === 'start') {
         console.log("value",date.value,value); 
         uni.showToast({
@@ -68,7 +74,6 @@ const bindDateChange = (e,type,value) => {
             icon:"none",
             title:"不能比开始时间早噢~",
             duration:1000
-
         })
         end.value='2000-10-01'
         nextTick(() => {
@@ -100,6 +105,14 @@ const judgeTime=(start,end)=>{
     return true
 }
 
+onMounted(()=>{
+    if(formData.recruitmentPeriod.startDate!==''){
+        date.value=formData.recruitmentPeriod.startDate
+    }
+    if(formData.recruitmentPeriod.endDate!==''){
+        end.value=formData.recruitmentPeriod.endDate
+    }
+})
 
 </script>
 

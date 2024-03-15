@@ -1,5 +1,16 @@
 <script setup>
-//
+
+import VerifyStu from '@/components/VerifyStu.vue';
+import {ref} from 'vue'
+//#ref
+
+const popup=ref()
+
+//# method
+const checkComfirm=()=>{
+  
+}
+
 </script>
 
 <template>
@@ -7,9 +18,9 @@
     <image src="../../static/images/center_bg.png"></image>
     <view class="select-form">
       <view>
-         <navigator url="../form/form" hover-class="navigator-hover" class="go-form">
+         <button class="go-form" @click="popup.open()">
 					 发布队伍-寻财才
-				</navigator>
+				</button>
         </view>
       <view>
          <navigator url="navigate/navigate?title=navigate" hover-class="navigator-hover" class="go-form">
@@ -17,6 +28,9 @@
 				</navigator>
         </view>
     </view>
+    <uni-popup ref="popup" type="center" background-color="white">
+      <VerifyStu />
+    </uni-popup>
   </view>
 </template>
 

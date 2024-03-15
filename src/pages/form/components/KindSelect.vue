@@ -1,18 +1,49 @@
 <script setup>
-import {ref} from 'vue'
+import {ref,defineEmits,onMounted} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo'
 
 /**
  * 0：都没选
  * 1：选择社团
  * 2：选择比赛
  */
-const kindSelect=ref(0)
+let kindSelect=ref(0)
+const formData=useFormStore().formData
 
+
+const emit=defineEmits(['get-allow'])
+
+//# start-method 
+
+//选择招募类型
 const selectBox=(select)=>{
     console.log(select);
     kindSelect.value=select
+    if(select==1){
+        formData.recruitmentType='社团'
+        emit('get-allow',true)
+    }else{
+        formData.recruitmentType='比赛'
+        emit('get-allow',true)
+    }
     uni.vibrateShort()
 }
+
+//# end-method
+
+//init
+onMounted(()=>{
+    //获取缓存
+    console.log('招募类型组件挂载了');
+    if(formData.recruitmentType!==''){
+        kindSelect.value = formData.recruitmentType === '社团' ? 1 : 2;
+        emit('get-allow',true)
+    }else{
+        emit('get-allow',false)
+    }
+
+})
+
 
 </script>
 

@@ -1,6 +1,10 @@
 <script setup>
 //
-import {reactive} from 'vue'
+import {reactive,onMounted,defineEmits} from 'vue'
+import {useFormStore} from '@/stores/modules/formInfo'
+
+const emit=defineEmits(['get-allow'])
+const formData=useFormStore().formData
 
 let tagList=reactive([
     "免早",
@@ -12,12 +16,11 @@ let tagList=reactive([
     "师兄师姐热心",
     "积累人脉",   
 ])
-let tagSelected=reactive([])
+let tagSelected=reactive(formData.tags)
 
 
 const selectTag=(tag)=>{
     if(tagSelected.length<4){
-        console.log(tag);
         tagSelected.push(tag)
         let tagIndex=tagList.indexOf(tag);
         tagList.splice(tagIndex,1)
@@ -27,14 +30,39 @@ const selectTag=(tag)=>{
             title:'最多选择4个标签'
         })
     }
+    checkIsAllow()
 }
 
 const cancelSelect=(tag)=>{
-    console.log(tag);
     tagList.push(tag)
     let tagIndex=tagSelected.indexOf(tag);
     tagSelected.splice(tagIndex,1)
+    checkIsAllow()
 }
+
+const checkIsAllow=()=>{
+    console.log("检查被触发了");
+    if(tagSelected.length>0){
+        emit('get-allow',true)
+        return
+    }else{
+        emit('get-allow',false)
+    }
+
+}
+
+
+onMounted(()=>{
+    for(let i=0;i<tagSelected.length;i++){
+        for(let j=0;j<tagList.length;j++){
+           if(tagSelected[i]==tagList[j]){
+            tagList.splice(j,1)
+            j--
+           }
+        }
+    }
+    checkIsAllow()
+})
 
 </script>
 
