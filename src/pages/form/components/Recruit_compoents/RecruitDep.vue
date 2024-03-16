@@ -30,7 +30,7 @@ const checkIsAllow=()=>{
     console.log("titleIsOk:",titleIsOk);
     console.log("deatilIsOk",deatilIsOk);
 
-    if(titleIsOk && deatilIsOk){
+    if(titleIsOk && deatilIsOk && formData.clubDescription.length!=0){
         emit('get-allow',true)
     }else{
         emit('get-allow',false)
@@ -50,7 +50,7 @@ const addDepCom=()=>{
     addItem.description=''
 
     if(id.value>=5){
-        uni.showToast({'icon':'error','title':"最多10个部门哦"})
+        uni.showToast({'icon':'error','title':"最多5个部门哦"})
         return
     }
     item.push(addItem)
@@ -99,12 +99,12 @@ onMounted(()=>{
 
 <template>
   <view class="recruit-dep-form">
-    <view class="tip" >来填写你要的招聘部门信息吧~</view>
+    <view class="tip" >来填写你要的{{formData.recruitmentType=="社团招募"?"招聘部门":"招聘职位"}}信息吧~</view>
 
     <DepItem  v-for="(i,index) in item" :key="index" :data="item[index]" @check-is-allow="checkIsAllow" @del-item="delItem"/>
 
     <view class="add-dep" @click="addDepCom">
-        <view class="add" >+ 添加部门</view>
+        <view class="add" >+ 添加{{formData.recruitmentType=="社团招募"?"部门":"职位"}}</view>
     </view>
   </view>
 </template>

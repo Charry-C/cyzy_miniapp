@@ -7,6 +7,15 @@ const emit=defineEmits(['check-is-allow','del-item'])
 const props = defineProps(['data']);
 console.log(props.data);
 
+let placeholderCon=reactive([{
+  title:"部门",
+  value:"部门介绍\n \n1.部门任务\n2.部门活动\n3.部分福利"
+},
+{
+  title:"职位",
+  value:"职位介绍\n \n1.职位任务\n2.职位需求\n3.职位福利"
+}])
+
 //# method-start
 const editTitle=(e,id)=>{
   //筛选出 当前被选中的input框
@@ -45,16 +54,14 @@ const delItem=(index)=>{
     <uni-swipe-action>
         <uni-swipe-action-item
             :right-options="options"
-            :show="true"
-            :auto-close="false"
+            show="true"
             @click="delItem(props.data.id)"
-            :disabled="props.data.id==1"
         >
           <view class="content-box">
             <view class="dep-item">
-              <input class="uni-input" :placeholder="`部门${props.data.id}名称`" @input="editTitle($event,props.data.id)"  :value="props.data.department"/>
+              <input class="uni-input" :placeholder="formData.recruitmentType === '社团招募'?placeholderCon[0].title : placeholderCon[1].title+`${props.data.id}名称`" @input="editTitle($event,props.data.id)"  :value="props.data.department"/>
               <view class="uni-textarea">
-              <textarea class="textarea"  placeholder=" 部门介绍\n \n1.部门任务\n2.部门活动\n3.部分福利" @input="editCon($event,props.data.id)" :value="props.data.description"></textarea>
+              <textarea class="textarea"  :placeholder="formData.recruitmentType === '社团招募' ? placeholderCon[0].value : placeholderCon[1].value" @input="editCon($event,props.data.id)" :value="props.data.description"></textarea>
               </view>
             </view>
 

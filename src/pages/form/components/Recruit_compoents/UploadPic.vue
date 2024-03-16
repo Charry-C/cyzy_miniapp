@@ -1,7 +1,9 @@
 <script setup>
 //
+import {useFormStore} from '@/stores/modules/formInfo'
 import {ref,reactive} from 'vue'
 let imageValue=reactive([])
+const formData=useFormStore().formData
 const listStyle=reactive({
 	"height": 100,	// 边框高度
 	"width": 100,	// 边框宽度
@@ -55,7 +57,7 @@ const listStyle=reactive({
 
 <template>
     <view class="upload-pic">
-        <view class="tip">还可以上传社团相册呀~</view>
+        <view class="tip">还可以上传{{formData.recruitmentType=="社团招募"?"社团相册":"团队相册"}}呀~</view>
         
         <view class="upload-info">
             <uni-file-picker 

@@ -21,10 +21,10 @@ const selectBox=(select)=>{
     console.log(select);
     kindSelect.value=select
     if(select==1){
-        formData.recruitmentType='社团'
+        formData.recruitmentType='社团招募'
         emit('get-allow',true)
     }else{
-        formData.recruitmentType='比赛'
+        formData.recruitmentType='团队招募'
         emit('get-allow',true)
     }
     uni.vibrateShort()
@@ -35,9 +35,10 @@ const selectBox=(select)=>{
 //init
 onMounted(()=>{
     //获取缓存
+    useFormStore().reSet()
     console.log('招募类型组件挂载了');
     if(formData.recruitmentType!==''){
-        kindSelect.value = formData.recruitmentType === '社团' ? 1 : 2;
+        kindSelect.value = formData.recruitmentType === '社团招募' ? 1 : 2;
         emit('get-allow',true)
     }else{
         emit('get-allow',false)

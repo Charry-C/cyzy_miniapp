@@ -69,7 +69,7 @@ onMounted(()=>{
 <template>
   <view class="tag-select">
     <view class="tip">
-        选择你们社团的标签吧~
+        选择你们{{formData.recruitmentType=="社团招募"?"社团标签":"团队标签"}}吧~
     </view>
     <view class="my-select-box"  v-if=" tagSelected.length!==0 "  >
         <view class="my-select-title">

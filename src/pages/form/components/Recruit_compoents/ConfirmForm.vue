@@ -33,16 +33,20 @@ const goEdit=(step)=>{
         </view>
         <view class="form-item">
             <view class="title">
-                社团名称
+                {{formData.recruitmentType=="社团招募"?"社团名称":"队伍名称"}}
             </view>
             <view class="value">
                 {{ formData.clubName }}
+                <template v-if="formData.recruitmentType!=='社团招募'">
+                    <view class="form-item-title">比赛名称</view>
+                    <view class="form-item-value">{{ formData.gameName }}</view>
+                </template>
             </view>
             <view class="edit" :class="editIcon" @click="goEdit(2)"></view>
         </view>
         <view class="form-item">
             <view class="title">
-                招聘部门
+                {{formData.recruitmentType=="社团招募"?"招聘部门":"招聘职位"}}
             </view>
             <view class="value">
                 <template v-for="(item,index) in formData.clubDescription" :key="index">
@@ -54,7 +58,7 @@ const goEdit=(step)=>{
         </view>
         <view class="form-item">
             <view class="title">
-                社团标签
+                {{formData.recruitmentType=="社团招募"?"社团标签":"团队标签"}}
             </view>
             <view class="value">
                 <view class="tag" v-for="(tag,index) in formData.tags" :key="index">{{ tag }}</view>
@@ -104,7 +108,7 @@ const goEdit=(step)=>{
         </view>
         <view class="form-item">
             <view class="title">
-                社团相册
+                {{formData.recruitmentType=="社团招募"?"社团相册":"团队相册"}}
             </view>
             <view class="value">
                 <view class="album" v-for="(img,index) in formData.clubAlbum" :key="index">{{ img }}</view>

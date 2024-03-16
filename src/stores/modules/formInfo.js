@@ -5,6 +5,7 @@ export const useFormStore=defineStore('form',()=>{
     const formData=reactive({
         "recruitmentType": "",
         "clubName": "",
+        "gameName":"",
         "clubDescription": [
           {
             "id":1,
@@ -25,15 +26,37 @@ export const useFormStore=defineStore('form',()=>{
         "clubAlbum": ["照片1", "照片2"]
   })
 
-  for(let key in formData){
-    console.log(key+':'+formData[key]);
-  }
+  const reSet = () => {
+    for (let key in formData) {
+        if (Array.isArray(formData[key])) {
+            formData[key] = [] // 重置数组为空数组
+        } else if (typeof formData[key] === 'object' && formData[key] !== null) {
+            // 如果是对象，则递归调用重置方法
+            reSetObject(formData[key])
+        } else {
+            formData[key] = '' // 重置其他属性为空字符串
+        }
+    }
+}
+
+const reSetObject = (obj) => {
+    for (let key in obj) {
+        if (Array.isArray(obj[key])) {
+            obj[key] = [] // 重置数组为空数组
+        } else if (typeof obj[key] === 'object' && obj[key] !== null) {
+            // 如果是对象，则递归调用重置方法
+            reSetObject(obj[key])
+        } else {
+            obj[key] = '' // 重置其他属性为空字符串
+        }
+    }
+}
 
 
     
     return {
         formData,
-
+        reSet
     }
 })
 

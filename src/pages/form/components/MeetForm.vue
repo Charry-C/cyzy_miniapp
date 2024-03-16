@@ -1,10 +1,9 @@
 <script setup>
-import RecruitForm from './components/RecruitForm.vue';
 
 </script>
 
 <template>
-  <RecruitForm />
+    
 </template>
 
 
