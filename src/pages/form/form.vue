@@ -52,20 +52,28 @@ let allowList=reactive([
 		step:8,
 		allowNext:true
 	},
-	{
-		step:9,
-		allowNext:true
-	},
 ])
+
+let sendAllow=ref(false)
 //# endregion variate
 
 
 //# region method
 const goNext=()=>{
-	if(step.value%stepSum.value==0){
-		step.value=1
-	}else{
+	if(step.value==allowList.length){
+		sendAllow.value=allowList.every((e)=>{
+			return e.allowNext==true
+		})
+	}
+	
+	if(allowList[step.value-1].allowNext){
 		step.value = step.value+1;
+	}
+	else{
+		uni.showToast({
+		icon:"error",
+		title:"请完整填写表单"
+		})
 	}
 }
 
@@ -81,6 +89,24 @@ const goBack=()=>{
 const isAllow=(value)=>{
 	console.log('get-allow',value);
 	allowList[step.value-1].allowNext=value
+}
+
+const editComponent=(val)=>{
+	step.value=val
+}
+
+const sendForm=()=>{
+	if(sendAllow.value){
+		uni.showToast({
+		icon:"success",
+		title:"发送成功"
+	})
+	}else{
+		uni.showToast({
+		icon:"warn",
+		title:"请完善表单再发布"
+	})
+	}
 }
 
 //# endregion method
@@ -104,15 +130,15 @@ const isAllow=(value)=>{
 	</view>
 	
 	<view class="form-con">
-  			<KindSelect @get-allow="isAllow" v-if="step===1"/>
-			<TitleForm @get-allow="isAllow" v-if="step===2"/>
-			<RecruitDep @get-allow="isAllow"  v-if="step===3"/>
-			<TagSelect @get-allow="isAllow" v-if="step===4"/>
-			<CampusSelect @get-allow="isAllow" v-if="step===5"/>
-			<TimeSelect @get-allow="isAllow" v-if="step===6"/>
-			<Contact @get-allow="isAllow" v-if="step===7"/>
-			<UploadPic @get-allow="isAllow" v-if="step===8"/>
-			<ConfirmForm @get-allow="isAllow" v-if="step===9"/>
+  			<KindSelect @get-allow="isAllow" @edit-componet="editComponent" v-if="step===1"/>
+			<TitleForm @get-allow="isAllow" @edit-componet="editComponent" v-if="step===2"/>
+			<RecruitDep @get-allow="isAllow" @edit-componet="editComponent"  v-if="step===3"/>
+			<TagSelect @get-allow="isAllow" @edit-componet="editComponent" v-if="step===4"/>
+			<CampusSelect @get-allow="isAllow" @edit-componet="editComponent" v-if="step===5"/>
+			<TimeSelect @get-allow="isAllow" @edit-componet="editComponent" v-if="step===6"/>
+			<Contact @get-allow="isAllow" @edit-componet="editComponent" v-if="step===7"/>
+			<UploadPic @get-allow="isAllow" @edit-componet="editComponent" v-if="step===8"/>
+			<ConfirmForm @get-allow="isAllow" @edit-componet="editComponent" v-if="step===9"/>
 	</view>
 
 
@@ -122,7 +148,8 @@ const isAllow=(value)=>{
 		</view>
 		<view class="step-box">
 			<view class="back bottom-btn" :style="{'visibility': step === 1 ? 'hidden' : 'visible'}" @click="goBack">BACK</view>
-			<view class="next bottom-btn" @click="goNext" :class="{'disabled':!allowList[step-1].allowNext}">NEXT</view>
+			<view class="next bottom-btn" @click="goNext" :class="{'disabled':!allowList[step-1].allowNext}" v-if="step<stepSum">NEXT</view>
+			<view class="next bottom-btn" @click="sendForm" :class="{'disabled':!sendAllow}" v-if="step==stepSum">Send</view>
 		</view>
 	</view>
 	</view>

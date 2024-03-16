@@ -4,8 +4,19 @@ import {ref } from 'vue'
 import { useFormStore } from '@/stores/modules/formInfo';
 const formData=useFormStore().formData
 import '@/static/cssStyle/iconfont.css'
+import KindSelect from './KindSelect.vue';
+import RecruitDep from './RecruitDep.vue';
+
 
 const editIcon=ref('iconfont icon-edit')
+const emit=defineEmits(['edit-componet'])
+
+const goEdit=(step)=>{
+    emit('edit-componet',step)
+}
+
+
+
 </script>
 
 <template>
@@ -18,7 +29,7 @@ const editIcon=ref('iconfont icon-edit')
             <view class="value">
                 {{ formData.recruitmentType }}
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(1)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -27,7 +38,7 @@ const editIcon=ref('iconfont icon-edit')
             <view class="value">
                 {{ formData.clubName }}
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(2)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -39,7 +50,7 @@ const editIcon=ref('iconfont icon-edit')
                     <view class="form-item-value">{{ item.description }}</view>
                 </template>
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(3)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -48,7 +59,7 @@ const editIcon=ref('iconfont icon-edit')
             <view class="value">
                 <view class="tag" v-for="(tag,index) in formData.tags" :key="index">{{ tag }}</view>
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(4)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -57,7 +68,7 @@ const editIcon=ref('iconfont icon-edit')
             <view class="value">
                 {{ formData.recruitmentCampus }}
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(5)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -73,7 +84,7 @@ const editIcon=ref('iconfont icon-edit')
                     <view class="form-item-value">{{ formData.recruitmentPeriod.endDate }}</view>    
                 </view>
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(6)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -89,7 +100,7 @@ const editIcon=ref('iconfont icon-edit')
                     <view class="form-item-value" v-for="(img,index) in formData.recruitmentContact.groupQRCode" :key="index">{{ img }}</view>
                 </view>
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(7)"></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -98,14 +109,15 @@ const editIcon=ref('iconfont icon-edit')
             <view class="value">
                 <view class="album" v-for="(img,index) in formData.clubAlbum" :key="index">{{ img }}</view>
             </view>
-            <view class="edit" :class="editIcon"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(8)"></view>
         </view>
         
     </view>
   </view>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+
 .confirm-form{
     margin: 0 3vw;
     border-radius: 5vw;

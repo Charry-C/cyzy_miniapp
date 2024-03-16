@@ -10,6 +10,7 @@ import {useFormStore} from '@/stores/modules/formInfo'
 let kindSelect=ref(0)
 const formData=useFormStore().formData
 
+let props=defineProps(['edit'])
 
 const emit=defineEmits(['get-allow'])
 
@@ -48,7 +49,7 @@ onMounted(()=>{
 </script>
 
 <template>
-<view class="kind-select">
+<view class="kind-select" :style="{ transform: props.edit ? 'scale(0.8)' : 'scale(1)' }" >
     <view class="title">请选择你的招募类型</view>
     <view class="select-box-area">
         <view class="select-box" :class="{ 'active-select': kindSelect === 1 }" @click="selectBox(1)">
@@ -79,6 +80,7 @@ onMounted(()=>{
 
 
 .kind-select{
+
     .title{
         margin: 12vw 0 10vw 0;
         font-size: 6.5vw;

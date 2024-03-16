@@ -28,7 +28,7 @@ const getDate = (type) => {
 let date=ref(getDate())
 let end=ref(getDate())
 
-var vv=0
+
 /**
  * startDate:用于表示仪表盘范围最早时间
  * 
@@ -108,10 +108,16 @@ const judgeTime=(start,end)=>{
 onMounted(()=>{
     if(formData.recruitmentPeriod.startDate!==''){
         date.value=formData.recruitmentPeriod.startDate
+    }else{
+        formData.recruitmentPeriod.startDate=date.value
     }
     if(formData.recruitmentPeriod.endDate!==''){
         end.value=formData.recruitmentPeriod.endDate
+    }else{
+        formData.recruitmentPeriod.endDate=end.value
     }
+
+    
 })
 
 </script>

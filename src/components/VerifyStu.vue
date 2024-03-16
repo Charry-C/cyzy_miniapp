@@ -1,18 +1,19 @@
 <script setup>
 import {ref} from 'vue'
 let verify=ref(false)
+let emit=defineEmits(['close-pop'])
 
 const submit=()=>{
     uni.vibrateShort()
-    if(verify.value){
-        uni.navigateTo({url:'../form/form'})
-    }else{
-        setTimeout(()=>{
-            verify.value=true
-            uni.navigateTo({ url:'../form/form'})
-        },100)
-    }
+    setTimeout(()=>{
+        verify.value=true
+        uni.navigateTo({ url:'../form/form'})
+        emit('close-pop')
+    },1000)
+    
 }
+
+
 </script>
 
 <template>

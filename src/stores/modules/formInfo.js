@@ -8,28 +8,18 @@ export const useFormStore=defineStore('form',()=>{
         "clubDescription": [
           {
             "id":1,
-            "department": "外联部",
-            "description": "外联部负责社团的对外联系和合作。"
+            "department": "",
+            "description": ""
           },
-          {
-            "id":2,
-            "department": "宣传部",
-            "description": "宣传部负责社团的宣传工作。"
-          },
-          {
-            "id":3,
-            "department": "学术部",
-            "description": "学术部负责组织学术活动。"
-          }
         ],
-        "tags": ["免早", "积累经验", "学习技能"],
-        "recruitmentCampus": "佛山校区",
+        "tags": [],
+        "recruitmentCampus": "",
         "recruitmentPeriod": {
           "startDate": "",
           "endDate": ""
         },
         "recruitmentContact": {
-          "wechatID": "charryc777",
+          "wechatID": "",
           "groupQRCode": ["二维码1", "二维码2"]
         },
         "clubAlbum": ["照片1", "照片2"]

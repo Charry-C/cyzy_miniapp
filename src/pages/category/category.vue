@@ -1,7 +1,7 @@
 <script setup>
 
 import VerifyStu from '@/components/VerifyStu.vue';
-import {ref} from 'vue'
+import {ref,onUnmounted,onMounted} from 'vue'
 //#ref
 
 const popup=ref()
@@ -10,6 +10,15 @@ const popup=ref()
 const checkComfirm=()=>{
   
 }
+
+onMounted(()=>{
+  console.log('guazaile');
+
+})
+
+onUnmounted(()=>{
+  console.log('xiaochule');
+})
 
 </script>
 
@@ -29,7 +38,7 @@ const checkComfirm=()=>{
         </view>
     </view>
     <uni-popup ref="popup" type="center" background-color="white">
-      <VerifyStu />
+      <VerifyStu @close-pop="popup.close()"/>
     </uni-popup>
   </view>
 </template>

@@ -1,5 +1,5 @@
 <script setup>
-import {ref,reactive,onMounted,defineEmits} from 'vue'
+import {ref,reactive,onMounted,defineEmits,nextTick,watch } from 'vue'
 import DepItem from '@/components/DepItem.vue';
 import { useFormStore } from '@/stores/modules/formInfo';
 const emit=defineEmits(['get-allow'])
@@ -58,6 +58,32 @@ const addDepCom=()=>{
     checkIsAllow()
 }
 
+// watch(formData.clubDescription, (newValue, oldValue) => {
+//   // 处理变化
+//   console.log("newVal",newValue);
+// }, { deep: true });
+
+//1.让store中的数据删除
+//2.让页面的item和store绑定的重新绑定
+//3.页面发生更新
+const delItem=(index)=>{
+    let delItemIndex=0
+    
+    //找出要删除的对象下标
+    formData.clubDescription.forEach((item,i)=>{
+        if(item.id==index){
+            delItemIndex=i
+            return
+        }
+    })
+
+    //删除
+    formData.clubDescription.splice(delItemIndex,1)
+
+
+    //触发检查
+    checkIsAllow()
+}
 
 //#method-end
 
@@ -75,7 +101,7 @@ onMounted(()=>{
   <view class="recruit-dep-form">
     <view class="tip" >来填写你要的招聘部门信息吧~</view>
 
-    <DepItem  v-for="(i,index) in item" :key="index" :data="item[index]" @check-is-allow="checkIsAllow"/>
+    <DepItem  v-for="(i,index) in item" :key="index" :data="item[index]" @check-is-allow="checkIsAllow" @del-item="delItem"/>
 
     <view class="add-dep" @click="addDepCom">
         <view class="add" >+ 添加部门</view>
