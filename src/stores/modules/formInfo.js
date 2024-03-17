@@ -26,6 +26,8 @@ export const useFormStore=defineStore('form',()=>{
         "clubAlbum": ["照片1", "照片2"]
   })
 
+  let choose=ref(0)
+
   const reSet = () => {
     for (let key in formData) {
         if (Array.isArray(formData[key])) {
@@ -53,9 +55,16 @@ const reSetObject = (obj) => {
 }
 
 
+
+const formData2=reactive({
+    "contacts": [    ]
+})
+
     
     return {
         formData,
+        formData2,
+        choose,
         reSet
     }
 })

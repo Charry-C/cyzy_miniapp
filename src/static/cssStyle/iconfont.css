@@ -1,9 +1,9 @@
 @font-face {
     font-family: "iconfont";
     /* Project id 4467735 */
-    src: url('//at.alicdn.com/t/c/font_4467735_gk4cznhruba.woff2?t=1710467516240') format('woff2'),
-        url('//at.alicdn.com/t/c/font_4467735_gk4cznhruba.woff?t=1710467516240') format('woff'),
-        url('//at.alicdn.com/t/c/font_4467735_gk4cznhruba.ttf?t=1710467516240') format('truetype');
+    src: url('//at.alicdn.com/t/c/font_4467735_vv8mewud7f.woff2?t=1710684699780') format('woff2'),
+        url('//at.alicdn.com/t/c/font_4467735_vv8mewud7f.woff?t=1710684699780') format('woff'),
+        url('//at.alicdn.com/t/c/font_4467735_vv8mewud7f.ttf?t=1710684699780') format('truetype');
 }
 
 .iconfont {
@@ -12,6 +12,22 @@
     font-style: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-QQ:before {
+    content: "\e882";
+}
+
+.icon-email:before {
+    content: "\e66f";
+}
+
+.icon-weixin:before {
+    content: "\e8bb";
+}
+
+.icon-phone:before {
+    content: "\e743";
 }
 
 .icon-edit:before {
