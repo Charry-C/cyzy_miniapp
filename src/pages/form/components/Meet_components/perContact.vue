@@ -13,14 +13,14 @@ const checkIsRight=(e)=>{
 }
 
 const addItem=(type)=>{
+    uni.vibrateShort()
+    const item=ref({})
     for (let i = 0; i < contactType.length; i++) {
         if(contactType[i]==type){
             contactType.splice(i,1)
             break
         }
     }
-
-    const item=ref({})
     item.type=type
     item.value=''
     contactsList.push(item)
@@ -59,10 +59,13 @@ onMounted(() => {
     font-size: 6.5vw;
     font-weight: bold;
     margin-left: 5vw;
+    margin-bottom: 3vh;
 }
 .add{
     display: flex;
     justify-content: space-evenly;
+    margin: 5vw 0;
+    padding-bottom: 15vh;
     .contact-icon{
         width: 13vw;
         height: 13vw;

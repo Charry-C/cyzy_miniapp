@@ -57,7 +57,7 @@ const reSetObject = (obj) => {
 
 
 const formData2=reactive({
-    "contacts": [    ]
+    "contacts": []
 })
 
     

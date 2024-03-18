@@ -3,6 +3,8 @@ import {ref} from 'vue'
 import formTop from '@/components/formTop.vue';
 import formProgress from '@/components/formProgress.vue';
 import PersonalContact from './Meet_components/perContact.vue';
+import TalentForm from './Meet_components/TalentForm.vue';
+import salaryForm from './Meet_components/salaryForm.vue'
 
 let step=ref(1)
 let stepSum=ref(5)
@@ -32,7 +34,10 @@ const goBack=()=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-        <PersonalContact />
+        <PersonalContact v-if="step==1" />
+        <TalentForm v-if="step==2"/>
+		<salaryForm v-if="step==3"/>
+
     </view>
     <view class="bottom-step">
 			<formProgress :step="step" :step-sum="stepSum" />
