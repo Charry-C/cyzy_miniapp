@@ -4,8 +4,7 @@ import {ref } from 'vue'
 import { useFormStore } from '@/stores/modules/formInfo';
 const formData=useFormStore().formData
 import '@/static/cssStyle/iconfont.css'
-import KindSelect from './KindSelect.vue';
-import RecruitDep from './RecruitDep.vue';
+
 
 
 const editIcon=ref('iconfont icon-edit')

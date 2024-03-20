@@ -56,14 +56,20 @@ const reSetObject = (obj) => {
 
 
 
-const formData2=reactive({
-    "contacts": []
+const applyformData=reactive({
+    "applyType":"",
+    "applyPosition":"",
+    "perDescription":"",
+    "salary":"",
+    "contacts": [],
+    "applyCampus":"",
+
 })
 
     
     return {
         formData,
-        formData2,
+        applyformData,
         choose,
         reSet
     }

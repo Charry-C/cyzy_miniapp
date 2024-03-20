@@ -1,15 +1,48 @@
 <script setup>
-import {ref} from 'vue'
+import {reactive, ref} from 'vue'
 import formTop from '@/components/formTop.vue';
 import formProgress from '@/components/formProgress.vue';
 import PersonalContact from './Meet_components/perContact.vue';
 import TalentForm from './Meet_components/TalentForm.vue';
 import salaryForm from './Meet_components/salaryForm.vue'
+import perDesc from './Meet_components/perDesc.vue'
+import typeSelect from './Meet_components/typeSelect.vue'
+import campusSelect from './Meet_components/campusSelect.vue'
+import confirmForm from './Meet_components/confirmForm.vue';
 
 let step=ref(1)
-let stepSum=ref(5)
+let stepSum=ref(7)
 let kind=ref('求职发布')
-
+let allowList=[
+	{
+		step:"step1",
+		value:false
+	},
+	{
+		step:"step2",
+		value:false
+	},
+	{
+		step:"step13",
+		value:false
+	},
+	{
+		step:"step4",
+		value:false
+	},
+	{
+		step:"step5",
+		value:false
+	},
+	{
+		step:"step6",
+		value:false
+	},
+	{
+		step:"step7",
+		value:false
+	},
+]
 
 //# region method
 const goNext=()=>{
@@ -28,16 +61,28 @@ const goBack=()=>{
 	}
 }
 
+const editComponet=(value)=>{
+	step.value=value
+}
+
+const allowNext=(stepIndex,isAllow)=>{
+	allowList[stepIndex]=isAllow
+
+}
+
 
 </script>
 
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-        <PersonalContact v-if="step==1" />
-        <TalentForm v-if="step==2"/>
-		<salaryForm v-if="step==3"/>
-
+		<typeSelect v-if="step==1" @allow-next="allowNext"/>
+        <TalentForm v-if="step==2" @allow-next="allowNext"/>
+		<perDesc v-if="step==3" @allow-next="allowNext" />
+		<salaryForm v-if="step==4" @allow-next="allowNext"/>
+        <PersonalContact v-if="step==5" @allow-next="allowNext" />
+		<campusSelect v-if="step==6" @allow-next="allowNext" />
+		<confirmForm v-if="step==7" @edit-componet="editComponet" @allow-next="allowNext" />
     </view>
     <view class="bottom-step">
 			<formProgress :step="step" :step-sum="stepSum" />
@@ -53,7 +98,7 @@ const goBack=()=>{
 <style lang="scss">
 
 .con{
-    margin-top: 20vw;
+    margin-top: 8vh;
 }
 
 .bottom-step{

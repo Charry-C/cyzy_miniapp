@@ -2,15 +2,46 @@
 import { ref,reactive, nextTick, onMounted } from 'vue'
 import contactCard from '@/components/contactCard.vue';
 import {useFormStore} from '@/stores/modules/formInfo.js'
+import topTitle from '@/components/topTitle.vue';
+
 
 const contactType=reactive([ "微信","QQ","手机","邮箱"])
-const formData=useFormStore().formData2
 
+const emit=defineEmits(['allow-next'])
+
+//载入缓存
+const formData=useFormStore().applyformData
 let contactsList=reactive(formData.contacts)
 
-const checkIsRight=(e)=>{
+//检查函数
+//1.检查是否有联系方式
+//2.检查联系方式是否为空
+const checkForm=()=>{
+    //检查缓存
+    if(contactsList.length>0){
+        emit('allow-next',true)
+        console.log("contact:gogo1");
 
+        //检查空
+        let allow=contactsList.every((e)=>{
+            return e.value!==''
+        })
+        if(allow){
+            emit('allow-next',true)
+            console.log("contact:gogo2");
+        }else{
+            emit('allow-next',false)
+            console.log("contact:nogogo2");
+        }
+    }else{
+        emit('allow-next',false)
+        console.log("contact:nogogo1");
+
+    }
 }
+
+
+
 
 const addItem=(type)=>{
     uni.vibrateShort()
@@ -21,10 +52,11 @@ const addItem=(type)=>{
             break
         }
     }
+    //赋初值
     item.type=type
     item.value=''
     contactsList.push(item)
-
+    checkForm()
 }
 
 const delItem=(type)=>{
@@ -35,62 +67,63 @@ const delItem=(type)=>{
             break
         }
     }
-   
+    checkForm()
 }
 
-onMounted(() => {
+//初始化页面
+const initItem=()=>{
 
+    //去重操作
+    for (let type = 0; type < contactType.length; type++) {
+        for (let formType = 0; formType < contactsList.length; formType++) {
+            if(contactType[type]==contactsList[formType].type){
+                contactType.splice(type,1)
+                type--
+                break
+            }
+        }    
+
+    }
+
+}
+initItem()
+
+
+
+onMounted(() => {
+    checkForm()
 })
 </script>
 
 <template>
-    <view class="tip">请选择您的联系方式</view>
-    <contactCard v-for="(contact,index) in contactsList" :key="index" v-model="contact.value" :contact="contact" @del-item="delItem"/>
+    <topTitle top-title="请选择您的联系方式" />
+    <contactCard v-for="(contact,index) in contactsList" :key="index" v-model="contact.value" :contact="contact" @del-item="delItem" @check-input="checkForm"/>
     <view class="add">
         <view class="contact-icon" @click="addItem(type)" v-for="(type,index) in contactType" :key="index">{{ type }}</view>
-
     </view>
 </template>
 
 
 
 <style lang="scss">
-.tip{
-    font-size: 6.5vw;
-    font-weight: bold;
-    margin-left: 5vw;
-    margin-bottom: 3vh;
-}
+
 .add{
     display: flex;
     justify-content: space-evenly;
     margin: 5vw 0;
     padding-bottom: 15vh;
     .contact-icon{
-        width: 13vw;
-        height: 13vw;
+        width: 15vw;
+        height: 15vw;
         border-radius: 50%;
         color: #fff;
-        font-size: 3vw;
+        font-size: 3.5vw;
         text-align: center;
-        line-height: 13vw;
+        line-height: 15vw;
         font-weight: bold;
         box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
-        &:nth-child(1){
-        background-color: #00d24a;
-        }
-        &:nth-child(2){
-            background-color: #0284f5;
-            
-        }
-        &:nth-child(3){
-            color: #000000;
-            background-color: #efff13;
-            
-        }
-        &:nth-child(4){
-            background-color: #000000;
-        }
+        background-color: #000000;
+
     }
 }
 </style>

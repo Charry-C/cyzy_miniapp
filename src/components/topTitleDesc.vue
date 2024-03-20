@@ -15,7 +15,8 @@ let props=defineProps(['topTitleDesc'])
 
 <style lang="scss">
 .top-title-desc{
-    font-size: 5vw;
+    font-size:4.2vw;
+    padding: 0 3vw;
 }
 
 </style>

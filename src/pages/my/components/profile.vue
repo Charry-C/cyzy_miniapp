@@ -24,16 +24,16 @@
     </view>
     <view class="detail-info">
         <view class="info-box">
-            <view>1</view>
-            <view>我的收藏</view>
+            <view class="num">1</view>
+            <view class="type">我的收藏</view>
         </view>
         <view class="info-box">
-            <view>2</view>
-            <view>我的求职</view>
+            <view class="num">2</view>
+            <view class="type">我的求职</view>
         </view>
         <view class="info-box">
-            <view>3</view>
-            <view>我的招聘</view>
+            <view class="num">3</view>
+            <view class="type">我的招聘</view>
         </view>
     </view>
     
@@ -77,15 +77,14 @@
         .info-box{
             text-align: center;
             padding: 4vw;
-            view{
-                &:nth-child(1){
-                    font-weight: bold;
-                    margin-bottom: 1vw;
-                }   
-                &:nth-child(2){
-                    font-size: 3vw;
-                }   
-            }
+            .num{
+                font-weight: bold;
+                margin-bottom: 1vw;
+            }   
+            .type{
+                font-size: 3vw;
+            }   
+            
         }
     }
 }

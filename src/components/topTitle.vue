@@ -14,7 +14,8 @@ let props=defineProps(['topTitle'])
 
 <style lang="scss">
     .top-title{
-        font-size: 6.5vw;
-        font-weight: bold;
+        text-align: center;
+        padding: 2vh 3vw 5vh 3vw ;
+        font-size: 6.2vw;
     }
 </style>

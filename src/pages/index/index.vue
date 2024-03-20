@@ -84,7 +84,7 @@ function scroll(e) {
         <view @click="changeTab(1)" :class="{ 'selected': tabIndex === 1 }">寻财才</view>
     </view>
 
-    <scroll-view class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true" @scroll="scroll" :scroll-left="scrollVal">
+    <scroll-view  class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true" @scroll="scroll"  :scroll-left="scrollVal" >
               <view id="demo1" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled @refresherrefresh="refreshData(0)" :refresher-triggered="triggered">
                   <!-- <view class="card" v-for="info in cardData" :key="info.recruit_card_id">

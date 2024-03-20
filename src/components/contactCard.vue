@@ -1,11 +1,15 @@
 <script setup>
 import {ref,reactive} from 'vue'
-const emit=defineEmits(['del-item'])
+const emit=defineEmits(['del-item','check-input'])
 const props=defineProps(['contact'])
 const options=reactive([{text:"删除",	style: {backgroundColor: 'rgb(214, 0, 0)'}}])
 
 const deleteItem=(val)=>{
     emit('del-item',val)
+}
+
+const checkIsRight=()=>{
+    emit('check-input')
 }
 
 </script>
@@ -46,9 +50,9 @@ const deleteItem=(val)=>{
     padding: 5vw;
     .card-title{
         position: absolute;
-        background-color: #00d24a;
+        background-color: #000000;
         color: #fff;
-        width: 15vw;
+        width: 100%;
         height: 4vh;
         border-radius:2vw 2vw 0 0;
         left: 0;
