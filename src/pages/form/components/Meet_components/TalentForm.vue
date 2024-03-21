@@ -59,6 +59,7 @@ import {ref,reactive,onMounted} from 'vue'
   const bindPickerChange=(e)=>{
         if(e.detail.value==0){
             formData.applyPosition=''
+            index.value=0
             console.log('applyPosition:nogogo');
             emit('allow-next',false)
         }else{

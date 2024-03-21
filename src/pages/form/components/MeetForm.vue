@@ -9,11 +9,14 @@ import perDesc from './Meet_components/perDesc.vue'
 import typeSelect from './Meet_components/typeSelect.vue'
 import campusSelect from './Meet_components/campusSelect.vue'
 import confirmForm from './Meet_components/confirmForm.vue';
+import { useFormStore } from '@/stores/modules/formInfo';
+
+const formData=useFormStore()
 
 let step=ref(1)
 let stepSum=ref(7)
 let kind=ref('求职发布')
-let allowList=[
+let allowList=reactive([
 	{
 		step:"step1",
 		value:false
@@ -42,7 +45,7 @@ let allowList=[
 		step:"step7",
 		value:false
 	},
-]
+])
 
 //# region method
 const goNext=()=>{
@@ -63,11 +66,22 @@ const goBack=()=>{
 
 const editComponet=(value)=>{
 	step.value=value
+	if(step.value==1){
+		formData.reSet(formData.applyformData)
+	}
 }
 
-const allowNext=(stepIndex,isAllow)=>{
-	allowList[stepIndex]=isAllow
-
+const allowNext=(isAllow)=>{
+	allowList[step.value-1].value=isAllow
+	console.log(allowList);
+	let flag=true
+	for (let i = 0; i < allowList.length-1; i++) {
+		if(!allowList[i].value){
+			flag=false
+			break
+		}
+	}
+	allowList[allowList.length-1].value=flag
 }
 
 
@@ -76,7 +90,7 @@ const allowNext=(stepIndex,isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<typeSelect v-if="step==1" @allow-next="allowNext"/>
+		<typeSelect v-if="step==1"  @allow-next="allowNext"/>
         <TalentForm v-if="step==2" @allow-next="allowNext"/>
 		<perDesc v-if="step==3" @allow-next="allowNext" />
 		<salaryForm v-if="step==4" @allow-next="allowNext"/>
@@ -87,8 +101,8 @@ const allowNext=(stepIndex,isAllow)=>{
     <view class="bottom-step">
 			<formProgress :step="step" :step-sum="stepSum" />
 			<view class="step-box">
-				<view class="back bottom-btn" @click="goBack">BACK</view>
-				<view class="next bottom-btn" @click="goNext">NEXT</view>
+				<view class="back bottom-btn" @click="goBack" >BACK</view>
+				<view class="next bottom-btn" @click="goNext" :class="{'disabled':!allowList[step-1].value}">NEXT</view>
 				
 			</view>
 		</view>
@@ -99,6 +113,7 @@ const allowNext=(stepIndex,isAllow)=>{
 
 .con{
     margin-top: 8vh;
+	padding-bottom: 12vh;
 }
 
 .bottom-step{

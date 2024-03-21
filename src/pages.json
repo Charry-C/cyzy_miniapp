@@ -42,6 +42,13 @@
         "navigationBarTitleText": "表单",
       }
     },
+    {
+      "path": "pages/detail/detail",
+      "style": {
+        "navigationBarTitleText": "详情页",
+        "navigationStyle": "custom",
+      }
+    },
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",

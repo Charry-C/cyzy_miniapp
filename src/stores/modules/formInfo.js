@@ -28,15 +28,15 @@ export const useFormStore=defineStore('form',()=>{
 
   let choose=ref(0)
 
-  const reSet = () => {
-    for (let key in formData) {
-        if (Array.isArray(formData[key])) {
-            formData[key] = [] // 重置数组为空数组
-        } else if (typeof formData[key] === 'object' && formData[key] !== null) {
+  const reSet = (form) => {
+    for (let key in form) {
+        if (Array.isArray(form[key])) {
+            form[key] = [] // 重置数组为空数组
+        } else if (typeof form[key] === 'object' && form[key] !== null) {
             // 如果是对象，则递归调用重置方法
-            reSetObject(formData[key])
+            reSetObject(form[key])
         } else {
-            formData[key] = '' // 重置其他属性为空字符串
+            form[key] = '' // 重置其他属性为空字符串
         }
     }
 }

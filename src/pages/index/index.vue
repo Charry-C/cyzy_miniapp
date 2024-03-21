@@ -150,6 +150,22 @@ function scroll(e) {
                       <view class="location">佛山校区</view>
                     </view>
                   </view>
+                  <view class="card" >
+                    <view class="title">田径队</view>
+                    <view class="kind">社团</view>
+                    <view class="tag-list">
+                      <view class="tag">更高</view>
+                      <view class="tag">更快</view>
+                      <view class="tag">更强</view>
+                    </view>
+                    <view class="detail-info">
+                      <view class="publisher">
+                        <view class="avatar"></view>
+                        <view>Tim</view>
+                      </view>
+                      <view class="location">佛山校区</view>
+                    </view>
+                  </view>
                 </scroll-view>
               </view>
 
@@ -158,48 +174,30 @@ function scroll(e) {
                   <view class="card" >
                     <view class="title">前端工程师</view>
                     <view class="kind">技术者</view>
-                    <view class="tag-list">
-                      <view class="tag">代码能力强</view>
-                      <view class="tag">有责任心</view>
-                      <view class="tag">回复快</view>
-                    </view>
-                    <view class="detail-info">
-                      <view class="publisher">
-                        <view class="avatar"></view>
-                        <view>Charryc777</view>
-                      </view>
-                      <view class="location">广州校区</view>
-                    </view>
-                  </view>
-                  <view class="card" >
-                    <view class="title">UI设计师</view>
-                    <view class="kind">技术者</view>
-                    <view class="tag-list">
-                      <view class="tag">设计优雅</view>
-                      <view class="tag">有责任心</view>
-                      <view class="tag">交付速度快</view>
+                    <view class="description">
+                        我是一个技术很强的前端工程师,我能胜任各种各样的页面开发我是一个技术很强的前端工程师,我能胜任各种各样的页面开发我是一个技术很强的前端工程师,我能胜任各种各样的页面开发
                     </view>
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
                         <view>Andy</view>
                       </view>
-                      <view class="location">不限校区</view>
+                      <view class="location">广州校区</view>
                     </view>
                   </view>
                   <view class="card" >
-                    <view class="title">后端工程师</view>
-                    <view class="kind">技术者</view>
-                    <view class="tag-list">
-                      <view class="tag">代码能力强</view>
-                      <view class="tag">有责任心</view>
+                    <view class="salary"><view class="icon">￥</view>100</view>
+                    <view class="title">代拿外卖</view>
+                    <view class="kind">代工跑腿型</view>
+                    <view class="description">
+                        我的配送速度很快,周三周五中午可以为大家代拿快递和外卖,有需要的可以联系我
                     </view>
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>Lucy</view>
+                        <view>charry</view>
                       </view>
-                      <view class="location">佛山校区</view>
+                      <view class="location">佛山</view>
                     </view>
                   </view>
                 </scroll-view>
@@ -266,13 +264,35 @@ page{
       flex-direction: column;
       height: 100%;
       .card{
-      padding: 3vw;
+      padding: 3vh 4vw 1vh 4vw;
       margin:0 2vw;
       margin-bottom: 3vw;
       border-radius: 3vw;
       box-shadow: rgba(99, 99, 99, 0.1) 0px 2px 8px 0px;
       &:nth-child(1){
         margin-top: 3vw;
+      }
+      .salary{
+        float: right;
+        display: flex;
+        --font:3vw;
+        align-items:flex-end;
+        font-weight: bold;
+        font-size: 4vw;
+        .icon{
+        font-size: var(--font);
+        }
+      }
+      .description{
+        font-size: 3.5vw;
+        padding: 0 3vw;
+        margin: 1.2vh 0;
+        color: #5a5a5a;
+        white-space: pre-line;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
       }
       .title{
         font-size: 4.8vw;
@@ -304,8 +324,8 @@ page{
           display: flex;
           align-items: center;
           .avatar{
-            width: 10vw;
-            height:10vw;
+            width: 8vw;
+            height:8vw;
             margin-right: 2vw;
             background-color: #22d3ff;
             border-radius: 50%;

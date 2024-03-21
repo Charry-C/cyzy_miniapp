@@ -1,22 +1,26 @@
 <script setup>
-import {ref,reactive,nextTick} from 'vue'
+import {ref,reactive,nextTick, onMounted} from 'vue'
 import topTitle from '@/components/topTitle.vue';
 import topTitleDesc from '@/components/topTitleDesc.vue'
-
 import warnTipVue from "@/components/warnTip.vue";
+import { useFormStore } from '@/stores/modules/formInfo';
 
-
+const formData=useFormStore().applyformData
 let salary=ref()
 const warnTip=ref(false)
-let i=1
+const emit=defineEmits(['allow-next'])
 
 
 //后续改进使用正则
 const checkForm=(e)=>{
-    nextTick(()=>{
-           console.log("nextYtick");
-        })
+
     let target=e.target.value
+
+    if(target==''){
+        emit('allow-next',false)
+        return 
+    }
+
     if(target.indexOf(".")!==-1){
         console.log("asdas",target);
         let index=(target+'').indexOf(".")
@@ -27,25 +31,36 @@ const checkForm=(e)=>{
     
         nextTick(()=>{
             salary.value=target
+            formData.salary=salary.value
         })
-        
+        emit('allow-next',true)
         return
     }
     
     if(target.length>3){
         warnTip.value=true
         nextTick(()=>{
-            salary.value=0
+            salary.value=''
+            emit('allow-next',false)
         })
         return
-    }else{
-        warnTip.value=false
-
     }
-
+    else{
+        warnTip.value=false
+    }
     salary.value=target
+    formData.salary=salary.value
+    emit('allow-next',true)
+
 }
 
+onMounted(()=>{
+    if(formData.salary){
+        salary.value=formData.salary
+        emit('allow-next',true)
+    }
+
+})
 
 </script>
 

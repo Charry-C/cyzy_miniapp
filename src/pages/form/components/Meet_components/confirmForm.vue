@@ -12,25 +12,6 @@ const goEdit=(step)=>{
     emit('edit-componet',step)
 }
 
-const contacts=[
-    {
-    type:"微信",
-    value:"charryc"
-    },
-    {
-    type:"QQ",
-    value:"1121716938"
-    },
-    {
-    type:"邮箱",
-    value:"charryc@gmail.com"
-    },
-    {
-    type:"手机",
-    value:"18128339573"
-    },
-]
-
 
 </script>
 
@@ -69,7 +50,7 @@ const contacts=[
                 期待报酬
             </view>
             <view class="value">
-                2.00￥
+                {{formData.salary}} RMB
             </view>
             <view class="edit" :class="editIcon" @click="goEdit(4)"></view>
         </view>
@@ -106,7 +87,6 @@ const contacts=[
     margin: 0 3vw;
     border-radius: 5vw;
     border: 0.1vw solid #ececec;
-    margin-bottom: 11vh;
     .form-item{
         position: relative;
         flex: 1;

@@ -26,6 +26,9 @@ const checkAllow=()=>{
 
 
 onMounted(()=>{
+    if(formData.perDescription){
+        description.value=formData.perDescription
+    }
     checkAllow()
 })
 
