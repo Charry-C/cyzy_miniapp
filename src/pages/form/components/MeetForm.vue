@@ -10,7 +10,7 @@ import typeSelect from './Meet_components/typeSelect.vue'
 import campusSelect from './Meet_components/campusSelect.vue'
 import confirmForm from './Meet_components/confirmForm.vue';
 import { useFormStore } from '@/stores/modules/formInfo';
-
+import freeTime from './Meet_components/freeTime.vue'
 const formData=useFormStore()
 
 let step=ref(1)
@@ -90,7 +90,8 @@ const allowNext=(isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<typeSelect v-if="step==1"  @allow-next="allowNext"/>
+		<freeTime v-if="step==1" />
+		<typeSelect v-if="step==8"  @allow-next="allowNext"/>
         <TalentForm v-if="step==2" @allow-next="allowNext"/>
 		<perDesc v-if="step==3" @allow-next="allowNext" />
 		<salaryForm v-if="step==4" @allow-next="allowNext"/>

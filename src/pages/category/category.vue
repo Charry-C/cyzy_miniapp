@@ -74,6 +74,7 @@ image{
     &:nth-child(1){
       .go-form{
         background-color: rgb(43, 226, 192);
+        color: #fff;
         box-shadow: rgba(0, 188, 135, 0.658) 0px 4px 6px -1px, rgba(0, 93, 30, 0.404) 0px 2px 4px -1px;
       }
     }

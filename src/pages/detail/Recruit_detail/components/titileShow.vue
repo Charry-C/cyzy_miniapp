@@ -58,7 +58,7 @@ const mock={
             border-radius: 1vw;
             margin: 0.5vh 1vw;
             font-size: var(--samllFont);
-            color: #2c2c2c;
+            color: #b200d5;
         }
     }
 }

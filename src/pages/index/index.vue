@@ -3,6 +3,8 @@
 import { onLoad } from "@dcloudio/uni-app"
 import {ref, reactive} from 'vue'
 import { getCardInfoApi } from "@/services/index"
+import { useFormStore } from "@/stores/modules/formInfo"
+
 
 const getCardInfo=async ()=>{
   const cardInfo=await getCardInfoApi()
@@ -69,6 +71,10 @@ function scroll(e) {
     }
 	}
 
+  const goDetail=(mode)=>{
+    useFormStore().mode=mode
+    uni.navigateTo({ url:'../detail/detail'})
+  }
 
 </script>
 
@@ -101,7 +107,7 @@ function scroll(e) {
                       <view class="location">{{info.campus}}</view>
                     </view>
                   </view> -->
-                  <view class="card" >
+                  <view class="card" @click="goDetail(1)">
                     <view class="title">数学建模研究社</view>
                     <view class="kind">社团</view>
                     <view class="tag-list">
@@ -171,7 +177,7 @@ function scroll(e) {
 
               <view id="demo2" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled>
-                  <view class="card" >
+                  <view class="card"  @click="goDetail(2)">
                     <view class="title">前端工程师</view>
                     <view class="kind">技术者</view>
                     <view class="description">
@@ -232,8 +238,8 @@ page{
 .top-box{
   padding: 2vw;
   background-color: #A9C9FF;
-  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-
+  // background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+  background-image: linear-gradient(180deg, #2bffd174 0%, #6afffa7c 50%,#ffffff15 100%,);
   .team-name{
     padding: 3vw;
     font-weight: bolder;

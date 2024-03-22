@@ -66,12 +66,15 @@ const applyformData=reactive({
 
 })
 
+const mode=ref(0)
+
     
     return {
         formData,
         applyformData,
         choose,
-        reSet
+        reSet,
+        mode
     }
 })
 

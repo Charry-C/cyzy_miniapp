@@ -39,22 +39,19 @@
     
 </view>
 <view class="uni-info">
-    <view>招聘合作</view>
-    <view>关于财遇知音</view>
-    <view>意见反馈</view>
+    <view class="item">招聘合作</view>
+    <view class="item">关于财遇知音</view>
+    <view class="item">意见反馈</view>
 </view>
 
-<view class="logout">
-    退出登录
-    <!-- <button @click="onLogout">退出登录</button> -->
-</view>
+
 </template>
 
 <style lang="scss"  >
 .profile-box{
     color: #555151;
-    background-color: #A9C9FF;
-  background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 50%,#fff 100%);
+  // background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
+  background-image: linear-gradient(180deg, #2bffd174 0%, #6afffa7c 50%,#ffffff15 100%,);
   padding-bottom: 4vw;
     .avatar-box{
         display: flex;
@@ -89,7 +86,7 @@
     }
 }
 .uni-info{
-    view{
+    .item{
         position: relative;
         font-size: 4vw;
         padding: 3vw;
