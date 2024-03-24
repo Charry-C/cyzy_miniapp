@@ -60,7 +60,7 @@ const initTime = (start, end) => {
         timeList.push(false)
     }
 }
-initTime(8, 22)
+initTime(8, 23)
 
 
 const checkIsSpare=()=>{

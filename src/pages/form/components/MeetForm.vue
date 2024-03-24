@@ -14,7 +14,7 @@ import freeTime from './Meet_components/freeTime.vue'
 const formData=useFormStore()
 
 let step=ref(1)
-let stepSum=ref(7)
+let stepSum=ref(8)
 let kind=ref('求职发布')
 let allowList=reactive([
 	{
@@ -44,6 +44,10 @@ let allowList=reactive([
 	{
 		step:"step7",
 		value:false
+	},
+	{
+		step:"step8",
+		value:true
 	},
 ])
 
@@ -90,8 +94,8 @@ const allowNext=(isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<freeTime v-if="step==1" />
-		<typeSelect v-if="step==8"  @allow-next="allowNext"/>
+		<freeTime v-if="step==8" />
+		<typeSelect v-if="step==1"  @allow-next="allowNext"/>
         <TalentForm v-if="step==2" @allow-next="allowNext"/>
 		<perDesc v-if="step==3" @allow-next="allowNext" />
 		<salaryForm v-if="step==4" @allow-next="allowNext"/>

@@ -33,7 +33,7 @@ const mock={
     .avatar{
         width: 15vw;
         height: 15vw;
-        background-color: pink;
+        background-color: rgb(117, 207, 255);
         border-radius: 50%;
         margin-right: 5vw;
     }

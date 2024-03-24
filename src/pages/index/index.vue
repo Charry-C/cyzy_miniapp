@@ -82,7 +82,7 @@ function scroll(e) {
   <view class="top-box" :style="{paddingTop:safeAreaInsets.top+'px'}" >
       <view class="team-name">财遇知音</view>
       <view class="uni-form-item uni-column">
-        <uni-search-bar class="uni-mt-10" radius="100" placeholder="搜索关键词" clearButton="auto" cancelButton="none" />
+        <uni-search-bar class="uni-mt-10" bgColor="#fff" textColor="#656565"	  radius="100" placeholder="搜索关键词" clearButton="auto" cancelButton="none" />
 			</view>
   </view>
   <view class="tab-box">
@@ -118,7 +118,7 @@ function scroll(e) {
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>陈泽驰</view>
+                        <view>陈同学</view>
                       </view>
                       <view class="location">佛山校区</view>
                     </view>
@@ -135,7 +135,7 @@ function scroll(e) {
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>Charry</view>
+                        <view>陈同学</view>
                       </view>
                       <view class="location">佛山校区</view>
                     </view>
@@ -151,23 +151,7 @@ function scroll(e) {
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>Tim</view>
-                      </view>
-                      <view class="location">佛山校区</view>
-                    </view>
-                  </view>
-                  <view class="card" >
-                    <view class="title">田径队</view>
-                    <view class="kind">社团</view>
-                    <view class="tag-list">
-                      <view class="tag">更高</view>
-                      <view class="tag">更快</view>
-                      <view class="tag">更强</view>
-                    </view>
-                    <view class="detail-info">
-                      <view class="publisher">
-                        <view class="avatar"></view>
-                        <view>Tim</view>
+                        <view>陈同学</view>
                       </view>
                       <view class="location">佛山校区</view>
                     </view>
@@ -178,7 +162,7 @@ function scroll(e) {
               <view id="demo2" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled>
                   <view class="card"  @click="goDetail(2)">
-                    <view class="title">前端工程师</view>
+                    <view class="title">前端开发工程师</view>
                     <view class="kind">技术者</view>
                     <view class="description">
                         我是一个技术很强的前端工程师,我能胜任各种各样的页面开发我是一个技术很强的前端工程师,我能胜任各种各样的页面开发我是一个技术很强的前端工程师,我能胜任各种各样的页面开发
@@ -186,13 +170,13 @@ function scroll(e) {
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>Andy</view>
+                        <view>李同学</view>
                       </view>
                       <view class="location">广州校区</view>
                     </view>
                   </view>
                   <view class="card" >
-                    <view class="salary"><view class="icon">￥</view>100</view>
+                    <view class="salary"><view class="icon">￥</view>5</view>
                     <view class="title">代拿外卖</view>
                     <view class="kind">代工跑腿型</view>
                     <view class="description">
@@ -201,9 +185,24 @@ function scroll(e) {
                     <view class="detail-info">
                       <view class="publisher">
                         <view class="avatar"></view>
-                        <view>charry</view>
+                        <view>王同学</view>
                       </view>
-                      <view class="location">佛山</view>
+                      <view class="location">佛山校区</view>
+                    </view>
+                  </view>
+                  <view class="card" >
+                    <view class="salary"><view class="icon"></view></view>
+                    <view class="title">数据分析师</view>
+                    <view class="kind">技术者</view>
+                    <view class="description">
+                        我精通python，学习了numpy、pandas、matplotlib等数据分析的库的使用，我获得过数据分析大赛一等奖，数模国赛国奖
+                    </view>
+                    <view class="detail-info">
+                      <view class="publisher">
+                        <view class="avatar"></view>
+                        <view>张同学</view>
+                      </view>
+                      <view class="location">广州校区</view>
                     </view>
                   </view>
                 </scroll-view>
@@ -229,6 +228,7 @@ page{
     display: none;  /* 隐藏滚动条 */
     }
 
+
 .selected{
   padding-bottom: 0.5vh;
   border-bottom: 1vw solid #22d3ff;
@@ -237,9 +237,7 @@ page{
 
 .top-box{
   padding: 2vw;
-  background-color: #A9C9FF;
-  // background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-  background-image: linear-gradient(180deg, #2bffd174 0%, #6afffa7c 50%,#ffffff15 100%,);
+  background-image: linear-gradient(180deg, rgba(0, 204, 255, 0.501) 0%, rgba(255, 255, 255, 0.464) 100%);
   .team-name{
     padding: 3vw;
     font-weight: bolder;

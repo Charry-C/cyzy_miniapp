@@ -49,9 +49,7 @@
 
 <style lang="scss"  >
 .profile-box{
-    color: #555151;
-  // background-image: linear-gradient(180deg, #A9C9FF 0%, #FFBBEC 100%);
-  background-image: linear-gradient(180deg, #2bffd174 0%, #6afffa7c 50%,#ffffff15 100%,);
+  background-image: linear-gradient(180deg, rgba(0, 204, 255, 0.501) 0%, rgba(255, 255, 255, 0.464) 100%);
   padding-bottom: 4vw;
     .avatar-box{
         display: flex;
@@ -64,7 +62,7 @@
         width: 15vw;
         height: 15vw;
         margin-right: 3vw;
-        background-color:rgb(255, 255, 255);
+        background-color:#ffffff;
         border-radius: 50%;
         }
     }

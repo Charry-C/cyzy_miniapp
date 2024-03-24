@@ -2,8 +2,8 @@
 
 
 const mock={
-    position:"代拿外卖",
-    salary:"20"
+    position:"前端开发工程师",
+    salary:""
 }
 
 
@@ -11,7 +11,7 @@ const mock={
 
 <template >
     <view class="pertitle-box">
-        <view class="salary">{{mock.salary}}￥/次</view>
+        <view class="salary" v-if="mock.salary">{{mock.salary}}￥/次</view>
         <view class="position-box">{{mock.position}}</view>
         <view class="verify"><uni-icons type="checkbox-filled"></uni-icons> 学生认证</view>
     </view>

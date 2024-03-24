@@ -28,7 +28,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{ formData.recruitmentType }}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(1)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(1)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -41,7 +41,7 @@ const goEdit=(step)=>{
                     <view class="form-item-value">{{ formData.gameName }}</view>
                 </template>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(2)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(2)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -53,7 +53,7 @@ const goEdit=(step)=>{
                     <view class="form-item-value">{{ item.description }}</view>
                 </template>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(3)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(3)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -62,7 +62,7 @@ const goEdit=(step)=>{
             <view class="value">
                 <view class="tag" v-for="(tag,index) in formData.tags" :key="index">{{ tag }}</view>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(4)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(4)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -71,7 +71,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{ formData.recruitmentCampus }}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(5)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(5)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -87,7 +87,7 @@ const goEdit=(step)=>{
                     <view class="form-item-value">{{ formData.recruitmentPeriod.endDate }}</view>    
                 </view>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(6)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(6)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -103,7 +103,7 @@ const goEdit=(step)=>{
                     <view class="form-item-value" v-for="(img,index) in formData.recruitmentContact.groupQRCode" :key="index">{{ img }}</view>
                 </view>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(7)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(7)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -112,7 +112,7 @@ const goEdit=(step)=>{
             <view class="value">
                 <view class="album" v-for="(img,index) in formData.clubAlbum" :key="index">{{ img }}</view>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(8)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(8)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         
     </view>

@@ -32,7 +32,7 @@ onUnmounted(()=>{
 
 <template>
   <view class="category">
-    <image src="../../static/images/center_bg.png"></image>
+    <view class="bg">财遇知音</view>
     <view class="select-form">
       <view class="go-box">
          <button class="go-form" @click="true==false?popup.open():checkComfirm(1)" >
@@ -45,7 +45,7 @@ onUnmounted(()=>{
 				</button>
         </view>
     </view>
-    <uni-popup ref="popup" type="center" background-color="white" v-if="false">
+    <uni-popup ref="popup" type="center" background-color="white" v-if="true">
       <VerifyStu @close-pop="popup.close()"/>
     </uni-popup>
   </view>
@@ -53,13 +53,21 @@ onUnmounted(()=>{
 
 <style lang="scss">
 //
-image{
-  height: 45vh;
+.bg{
+  text-align: center;
+  width: 100%;
+  line-height: 50vh;
+  font-size: 10vw;
+  color: #ffffff;
+  font-weight: bold;
+  height: 50vh;
+  background-image: linear-gradient(180deg, rgba(0, 204, 255, 0.501) 0%, rgba(255, 255, 255, 0.464) 100%);
+
 }
 .select-form{
   display: flex;
   flex-direction: column;
-  margin-top: 8vh;
+  margin-top: 10vh;
   .go-box{
     position: relative;
     margin:5vh auto ;
@@ -73,16 +81,16 @@ image{
     line-height: 15vw;
     &:nth-child(1){
       .go-form{
-        background-color: rgb(43, 226, 192);
+        background-color: #4d91ff;
         color: #fff;
-        box-shadow: rgba(0, 188, 135, 0.658) 0px 4px 6px -1px, rgba(0, 93, 30, 0.404) 0px 2px 4px -1px;
+        box-shadow: rgba(82, 177, 255, 0.658) 0px 4px 6px -1px, rgba(0, 93, 30, 0.404) 0px 2px 4px -1px;
       }
     }
     &:nth-child(2){
       .go-form{
-      background-color: rgb(255, 243, 21);
-      box-shadow: rgba(148, 198, 0, 0.509) 0px 4px 6px -1px, rgba(132, 139, 0, 0.237) 0px 2px 4px -1px;
-      color: #000;
+      background-color: #14a800;
+      box-shadow: rgba(0, 255, 119, 0.509) 0px 4px 6px -1px, rgba(132, 139, 0, 0.237) 0px 2px 4px -1px;
+      color: #ffffff;
       }
     }
     .go-form{

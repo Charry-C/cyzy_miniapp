@@ -9,7 +9,7 @@ const submit=()=>{
         verify.value=true
         uni.navigateTo({ url:'../form/form'})
         emit('close-pop')
-    },100)
+    },5000)
     
 }
 

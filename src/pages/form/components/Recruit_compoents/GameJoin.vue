@@ -49,7 +49,7 @@ onMounted(()=>{
         line-height: 6.5vh;
         padding: 0 2vw;
         font-size: 3.5vw;
-        border: 0.5vw solid #ccc;
+        border: 2px solid green;
         border-radius: 1vw;
     }
 </style>
