@@ -1,5 +1,7 @@
 <script setup>
 //
+import * as qiniu from 'qiniu-js'
+import config from 'config.json'
 import {useFormStore} from '@/stores/modules/formInfo'
 import {ref,reactive} from 'vue'
 let imageValue=reactive([])
@@ -15,6 +17,8 @@ const listStyle=reactive({
         "padding":"5vw"
 	}
 })
+
+
 
 //region method
     function select(e){
@@ -45,6 +49,8 @@ const listStyle=reactive({
             name: 'file',
             success: ({ data, statusCode }) => {
                 console.log(data,statusCode);
+                const observable = qiniu.upload(file, null, null, putExtra, config)
+                console.log("observable",observable);
             },
             fail: (error) => {
                 console.log(222);

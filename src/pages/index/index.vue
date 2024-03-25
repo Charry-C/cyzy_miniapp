@@ -89,7 +89,9 @@ function scroll(e) {
         <view @click="changeTab(0)"  :class="{ 'selected': tabIndex === 0 }">遇知音</view>
         <view @click="changeTab(1)" :class="{ 'selected': tabIndex === 1 }">寻财才</view>
     </view>
-
+    <input
+      type="file"
+    />
     <scroll-view  class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true" @scroll="scroll"  :scroll-left="scrollVal" >
               <view id="demo1" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled @refresherrefresh="refreshData(0)" :refresher-triggered="triggered">
