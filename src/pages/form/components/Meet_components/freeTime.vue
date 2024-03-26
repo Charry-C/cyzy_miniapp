@@ -1,61 +1,36 @@
 <script setup>
-import {ref,reactive} from 'vue'
+import {ref,reactive,onMounted} from 'vue'
 import topTitle from '@/components/topTitle.vue'
+import { useFormStore } from '@/stores/modules/formInfo'
+
+const emit=defineEmits(['allow-next'])
+const formData=useFormStore().applyformData
 
 const daySelected=ref(0)
 const dayList=reactive([false,false,false,false,false,false,false])
 const day=reactive(['一','二','三','四','五','六','日'])
-const freeTime=reactive([{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},{
-    dayofweek:"",
-    timeSelectedList:[]
-},])
+const freeTime=reactive(formData.freeTime)
+let left=ref(3)
+const timeList=reactive([])
+const time = reactive([])
 
+//初始化存储表
 const initFreeTime=()=>{
     day.forEach((e,index)=>{
+        freeTime[index]={}
         freeTime[index].dayofweek=e
         freeTime[index].timeSelectedList=[]
     })
 }
-initFreeTime()
 
-
-
-let left=ref(3)
-const week=reactive([])
-const initWeek=(start,end)=>{
-    for(let i=start;i<=end ; i++){
-        week.push(i)
-    }
-}
-initWeek(1,16)
-
-const timeList=reactive([])
-const time = reactive([])
+//初始化time选择列表
 const initTime = (start, end) => {
     let timeStr = ''
     for (let i = start; i <= end; i++) {
-        timeStr = i + ':00' + '-' + i + ':30'
+        timeStr = i + ':00' + '-'+ '-' + i + ':30'
         time.push(timeStr)
         timeStr = ''
-        timeStr = i + ':30' + '-' + (i + 1) + ':00'
+        timeStr = i + ':30' + '-'+ '-' + (i + 1) + ':00'
         time.push(timeStr)
         timeList.push(false)
     }
@@ -63,16 +38,20 @@ const initTime = (start, end) => {
 initTime(8, 23)
 
 
+//判断day中对应的列表是否为空
 const checkIsSpare=()=>{
+    let isSpare=true
     freeTime.forEach((e,index)=>{
         if(e.timeSelectedList.length>0){
             dayList[index]=true
+            isSpare=false
         }else{
             dayList[index]=false
         }
     })
+    emit('allow-next',!isSpare)
 }
-checkIsSpare()
+
 
 const selectBox=(index)=>{
    uni.vibrateShort()
@@ -107,6 +86,16 @@ const selectedTime=(index)=>{
     }
     checkIsSpare()
 }
+
+onMounted(()=>{
+    if(freeTime.length==0){
+        initFreeTime()
+    }
+    else{
+        selectBox(daySelected.value)
+        checkIsSpare()
+    }
+})
 
 
 </script>

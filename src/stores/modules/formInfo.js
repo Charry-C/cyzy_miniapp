@@ -23,7 +23,8 @@ export const useFormStore=defineStore('form',()=>{
           "wechatID": "",
           "groupQRCode": ["二维码1", "二维码2"]
         },
-        "clubAlbum": ["照片1", "照片2"]
+        "clubAlbum": ["照片1", "照片2"],
+
   })
 
   let choose=ref(0)
@@ -63,6 +64,7 @@ const applyformData=reactive({
     "salary":"",
     "contacts": [],
     "applyCampus":"",
+    "freeTime":[]
 
 })
 

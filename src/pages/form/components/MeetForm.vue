@@ -8,9 +8,11 @@ import salaryForm from './Meet_components/salaryForm.vue'
 import perDesc from './Meet_components/perDesc.vue'
 import typeSelect from './Meet_components/typeSelect.vue'
 import campusSelect from './Meet_components/campusSelect.vue'
+import freeTime from './Meet_components/freeTime.vue'
 import confirmForm from './Meet_components/confirmForm.vue';
 import { useFormStore } from '@/stores/modules/formInfo';
-import freeTime from './Meet_components/freeTime.vue'
+import showTimeVue from '@/components/showTime.vue';
+
 const formData=useFormStore()
 
 let step=ref(1)
@@ -47,7 +49,7 @@ let allowList=reactive([
 	},
 	{
 		step:"step8",
-		value:true
+		value:false
 	},
 ])
 
@@ -77,7 +79,8 @@ const editComponet=(value)=>{
 
 const allowNext=(isAllow)=>{
 	allowList[step.value-1].value=isAllow
-	console.log(allowList);
+	
+	//判断confirm表达前的所有表单是否都为true
 	let flag=true
 	for (let i = 0; i < allowList.length-1; i++) {
 		if(!allowList[i].value){
@@ -94,14 +97,14 @@ const allowNext=(isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<freeTime v-if="step==8" />
-		<typeSelect v-if="step==1"  @allow-next="allowNext"/>
+		<showTimeVue v-if="step==1"  @allow-next="allowNext"/>
         <TalentForm v-if="step==2" @allow-next="allowNext"/>
 		<perDesc v-if="step==3" @allow-next="allowNext" />
 		<salaryForm v-if="step==4" @allow-next="allowNext"/>
         <PersonalContact v-if="step==5" @allow-next="allowNext" />
 		<campusSelect v-if="step==6" @allow-next="allowNext" />
-		<confirmForm v-if="step==7" @edit-componet="editComponet" @allow-next="allowNext" />
+		<freeTime v-if="step==7" @allow-next="allowNext"/>
+		<confirmForm v-if="step==8" @edit-componet="editComponet" @allow-next="allowNext" />
     </view>
     <view class="bottom-step">
 			<formProgress :step="step" :step-sum="stepSum" />

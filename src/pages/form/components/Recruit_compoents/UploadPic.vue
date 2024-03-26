@@ -1,7 +1,6 @@
 <script setup>
 //
 import * as qiniu from 'qiniu-js'
-import config from 'config.json'
 import {useFormStore} from '@/stores/modules/formInfo'
 import {ref,reactive} from 'vue'
 let imageValue=reactive([])
@@ -40,7 +39,21 @@ const listStyle=reactive({
 	}
 
     function upload(e){
-        console.log(e);
+        const observable =qiniu.upload(e.tempFilePaths[0], null, 'A_B247s5kQyIZToHdZV0JMbxSw7NHcPaCE__k85s:e63v0YW0eRWMdNxaSmKMuXr1PmI=:eyJzY29wZSI6ImNoYXJyeWMiLCJkZWFkbGluZSI6MTcxMTU1ODI5OH0=')
+        const observer = {
+        next(res){
+            // ...
+            console.log("res",res);
+        },
+        error(err){
+            // ...
+        },
+        complete(res){
+            // ...
+        }
+        }
+        const subscription = observable.subscribe(observer) // 上传开始
+        console.log("subscription",subscription);
         const tempFilePaths = e.tempFilePaths
         uni.uploadFile({
             url: '/server',
@@ -49,8 +62,6 @@ const listStyle=reactive({
             name: 'file',
             success: ({ data, statusCode }) => {
                 console.log(data,statusCode);
-                const observable = qiniu.upload(file, null, null, putExtra, config)
-                console.log("observable",observable);
             },
             fail: (error) => {
                 console.log(222);
