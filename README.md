@@ -1,6 +1,10 @@
 ## 项目简介
+财遇知音是一款集成了 团队/社团招募展示，个人自荐展示，团队/社团发布招募，个人自荐发布的微信小程序，主要用于帮助广财的学生在社团招新，队伍招募成员，个人举荐时能够快速的通过 小程序的渐进式，引导式的填表模式实现信息的全面收集并展示，方便了团队招募写文案难，个人自荐曝光少等问题。
 
-小兔鲜儿项目包含从首页浏览商品，商品详情，微信登录，加入购物车，提交订单，微信支付，订单管理等功能。
+财遇知音项目包含三个tab主界面：
+一：首页展示招募卡片界面、人才卡片界面，
+二：招募与人才自荐界面
+三：个人主页界面
 
 当前仓库为小兔鲜儿的**项目模板**。
 
@@ -18,15 +22,12 @@
 
 ### 📗 接口文档
 
-[https://www.apifox.cn/apidoc/shared-0e6ee326-d646-41bd-9214-29dbf47648fa/](https://www.apifox.cn/apidoc/shared-0e6ee326-d646-41bd-9214-29dbf47648fa/)
+[https://apifox.com/apidoc/shared-cc5fd41b-d3fb-492a-b1ed-22273041c0ac/](https://apifox.com/apidoc/shared-cc5fd41b-d3fb-492a-b1ed-22273041c0ac/)
 
-### ✏️ 在线笔记
+### ✏️ 项目书
+https://www.yuque.com/charry-4ruyl/bfdak7/sby9fplcls6tpdhl?singleDoc# 《财遇知音项目书》
 
-[https://megasu.gitee.io/uni-app-shop-note/](https://megasu.gitee.io/uni-app-shop-note/)
 
-### 📦 项目源码
-
-[https://gitee.com/Megasu/uniapp-shop-vue3-ts/](https://gitee.com/Megasu/uniapp-shop-vue3-ts/)
 
 ## 运行程序
 

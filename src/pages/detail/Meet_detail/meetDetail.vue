@@ -2,6 +2,7 @@
 import pertitleShoew from './components/pertitleShow.vue'
 import perInfo from './components/perInfo.vue'
 import perdescShow from './components/perdescShow.vue'
+import showTime from '@/components/showTime.vue'
 const getContacts=()=>{
     uni.showToast({
         icon:"none",
@@ -14,6 +15,10 @@ const getContacts=()=>{
     <pertitleShoew />
     <perInfo />
     <perdescShow />
+    <view class="free-time">
+        <view class="tip">空闲时间表</view>
+        <showTime />
+    </view>
     <view class="contacts">
         <view class="btn" @click="getContacts">GET CONTACT</view>
     </view>
@@ -22,10 +27,19 @@ const getContacts=()=>{
 
 
 <style lang="scss">
+.free-time{
+    margin: 3vw 3vh; 
+    padding-bottom:10vh;
+    .tip{
+        margin-bottom: 3vh;
+        font-size: 5vw;
+        font-weight: bold;
+    }
+}
 .contacts{
     position: fixed;
     bottom: 0;
-    height: 8vh;
+    height: 10vh;
     width: 100vw;
     color: #ffffff;
 
@@ -39,7 +53,7 @@ const getContacts=()=>{
         padding:  1.5vh 10vw;
         font-weight: bold;
         border-radius: 2vw;
-        background-color: #000000;
+        background-color: #0084ffd4;
     }
 }
 </style>

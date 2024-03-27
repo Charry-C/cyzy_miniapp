@@ -3,7 +3,7 @@
 import { ref } from 'vue'
 import { useFormStore } from '@/stores/modules/formInfo';
 import '@/static/cssStyle/iconfont.css'
-
+import showTimeVue from '@/components/showTime.vue';
 const formData=useFormStore().applyformData
 const editIcon=ref('iconfont icon-edit')
 const emit=defineEmits(['edit-componet'])
@@ -75,7 +75,15 @@ const goEdit=(step)=>{
             </view>
             <view class="edit" :class="editIcon" @click="goEdit(6)"></view>
         </view>
-
+        <view class="form-item">
+            <view class="title">
+                空闲时间
+            </view>
+            <view class="value" style="margin-top: 3vh;">
+              <showTimeVue />
+            </view>
+            <view class="edit" :class="editIcon" @click="goEdit(7)"></view>
+        </view>
   </view>
 </template>
 

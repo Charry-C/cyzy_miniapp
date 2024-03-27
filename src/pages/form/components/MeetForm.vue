@@ -11,7 +11,7 @@ import campusSelect from './Meet_components/campusSelect.vue'
 import freeTime from './Meet_components/freeTime.vue'
 import confirmForm from './Meet_components/confirmForm.vue';
 import { useFormStore } from '@/stores/modules/formInfo';
-import showTimeVue from '@/components/showTime.vue';
+
 
 const formData=useFormStore()
 
@@ -51,6 +51,7 @@ let allowList=reactive([
 		step:"step8",
 		value:false
 	},
+
 ])
 
 //# region method
@@ -97,7 +98,7 @@ const allowNext=(isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<showTimeVue v-if="step==1"  @allow-next="allowNext"/>
+		<typeSelect v-if="step==1" @allow-next="allowNext" />
         <TalentForm v-if="step==2" @allow-next="allowNext"/>
 		<perDesc v-if="step==3" @allow-next="allowNext" />
 		<salaryForm v-if="step==4" @allow-next="allowNext"/>

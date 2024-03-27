@@ -27,10 +27,10 @@ const initFreeTime=()=>{
 const initTime = (start, end) => {
     let timeStr = ''
     for (let i = start; i <= end; i++) {
-        timeStr = i + ':00' + '-'+ '-' + i + ':30'
+        timeStr = i + ':00' + '-' + i + ':30'
         time.push(timeStr)
         timeStr = ''
-        timeStr = i + ':30' + '-'+ '-' + (i + 1) + ':00'
+        timeStr = i + ':30' + '-' + (i + 1) + ':00'
         time.push(timeStr)
         timeList.push(false)
     }

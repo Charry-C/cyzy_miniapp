@@ -65,7 +65,6 @@ const applyformData=reactive({
     "contacts": [],
     "applyCampus":"",
     "freeTime":[]
-
 })
 
 const mode=ref(0)
