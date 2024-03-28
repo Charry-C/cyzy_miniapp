@@ -67,7 +67,6 @@ const applyformData=reactive({
     "freeTime":[]
 })
 
-const mode=ref(0)
 
     
     return {
@@ -75,7 +74,6 @@ const mode=ref(0)
         applyformData,
         choose,
         reSet,
-        mode
     }
 })
 

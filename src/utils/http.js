@@ -2,6 +2,7 @@ import { useMemberStore } from '@/stores/modules/member'
 
 const baseURL = 'http://127.0.0.1:8000'
 
+//配置请求拦截
 const httpInterceptor = {
 
     //拦截前触发
@@ -38,6 +39,7 @@ uni.addInterceptor('request', httpInterceptor)
 uni.addInterceptor('uploadFile', httpInterceptor)
 
 
+//封装promise的请求函数
 export const http = (options) => {
     return new Promise((resolve, reject) => {
         uni.request({

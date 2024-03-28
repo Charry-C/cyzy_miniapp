@@ -1,32 +1,41 @@
 <script setup>
-// import Swiper from '@/components/Swiper.vue';
 import { onLoad } from "@dcloudio/uni-app"
 import {ref, reactive} from 'vue'
-import { getCardInfoApi } from "@/services/index"
-import { useFormStore } from "@/stores/modules/formInfo"
+import { getRecruitCardInfoApi,getMeetCardInfoApi } from "@/api/page_index"
 
 
-const getCardInfo=async ()=>{
-  const cardInfo=await getCardInfoApi()
-  console.log("首页卡片数据",cardInfo.data.data);
-  return cardInfo.data.data
+
+//变量定义
+const cardData=reactive([])
+const triggered=ref(false)
+const tabIndex=ref(0)
+const scrollVal=ref(0)
+
+//获取数据函数
+const getRecruitCardInfo=async ()=>{
+  const recruitCardInfo=await getRecruitCardInfoApi()
+  console.log("首页卡片数据",recruitCardInfo.data.data);
+  return recruitCardInfo.data.data
+}
+const getMeetCardInfo=async ()=>{
+  const meetCardInfo=await getMeetCardInfoApi()
+  console.log("首页卡片数据",meetCardInfo.data.data);
+  return meetCardInfo.data.data
 }
 
-const cardData=reactive([])
 
 onLoad(async()=>{
-  const data = await getCardInfo();
-  console.log("data",data);
-  cardData.push(...data); // 使用concat方法合并数组
-  console.log(cardData);
-	})
+  const recruitData = await getRecruitCardInfo();
+  const meetDara=await getMeetCardInfo()
+  console.log("recruitData",recruitData,"meetDara",meetDara);
+  cardData.push(...recruitData); // 使用concat方法合并数组
+})
 
 
-  const triggered=ref(false)
 
-  async function refreshData(){
+async function refreshData(){
   triggered.value=true
-  const data = await getCardInfo();
+  const data = await getRecruitCardInfo();
   console.log("data",data);
   cardData.unshift(...data); 
   console.log(123);
@@ -41,39 +50,35 @@ const {safeAreaInsets}=uni.getSystemInfoSync()
 console.log(safeAreaInsets);
 
 
-const tabIndex=ref(0)
-const scrollVal=ref(0)
-
 
 function changeTab(tab){
   tabIndex.value=tab
   scrollVal.value=tab*uni.getWindowInfo().screenWidth
 }
 
-function scroll(e) {
-  const w=uni.getWindowInfo().screenWidth
-  console.log(e.detail);
-    if(e.detail.deltaX<0 && e.detail.scrollLeft>120){
-      changeTab(1)
-      console.log(11111);
-    }else if(e.detail.deltaX<0 && e.detail.scrollLeft<=120){
-      changeTab(0)
-      console.log(2222);
+// function scroll(e) {
+//   const w=uni.getWindowInfo().screenWidth
+//   console.log(e.detail);
+//     if(e.detail.deltaX<0 && e.detail.scrollLeft>120){
+//       changeTab(1)
+//       console.log(11111);
+//     }else if(e.detail.deltaX<0 && e.detail.scrollLeft<=120){
+//       changeTab(0)
+//       console.log(2222);
 
-    }
-    if(e.detail.deltaX>0 && e.detail.scrollLeft>153){
-      changeTab(1)
-      console.log(3333);
-    }else if(e.detail.deltaX>0 && e.detail.scrollLeft<=153){
-      changeTab(0)
-      console.log(4444);
+//     }
+//     if(e.detail.deltaX>0 && e.detail.scrollLeft>153){
+//       changeTab(1)
+//       console.log(3333);
+//     }else if(e.detail.deltaX>0 && e.detail.scrollLeft<=153){
+//       changeTab(0)
+//       console.log(4444);
 
-    }
-	}
+//     }
+// 	}
 
   const goDetail=(mode)=>{
-    useFormStore().mode=mode
-    uni.navigateTo({ url:'../detail/detail'})
+    uni.navigateTo({ url:'../detail/detail?mode='+mode})
   }
 
 </script>
@@ -89,10 +94,10 @@ function scroll(e) {
         <view @click="changeTab(0)"  :class="{ 'selected': tabIndex === 0 }">遇知音</view>
         <view @click="changeTab(1)" :class="{ 'selected': tabIndex === 1 }">寻财才</view>
     </view>
-    <scroll-view  class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true" @scroll="scroll"  :scroll-left="scrollVal" >
+    <scroll-view  class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true"   :scroll-left="scrollVal" >
               <view id="demo1" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled @refresherrefresh="refreshData(0)" :refresher-triggered="triggered">
-                  <!-- <view class="card" v-for="info in cardData" :key="info.recruit_card_id">
+                  <view class="card" v-for="info in cardData" :key="info.recruit_card_id">
                     <view class="title">{{info.title}}</view>
                     <view class="kind">{{info.kind}}</view>
                     <view class="tag-list">
@@ -105,7 +110,7 @@ function scroll(e) {
                       </view>
                       <view class="location">{{info.campus}}</view>
                     </view>
-                  </view> -->
+                  </view>
                   <view class="card" @click="goDetail(1)">
                     <view class="title">数学建模研究社</view>
                     <view class="kind">社团</view>
@@ -160,6 +165,7 @@ function scroll(e) {
 
               <view id="demo2" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled>
+                  
                   <view class="card"  @click="goDetail(2)">
                     <view class="title">前端开发工程师</view>
                     <view class="kind">技术者</view>

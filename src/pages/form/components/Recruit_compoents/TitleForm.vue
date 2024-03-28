@@ -123,6 +123,13 @@ onMounted(()=>{
     <input class="uni-input" :placeholder="'请您填写' + (formData.recruitmentType === '社团招募' ? '社团' : '团队') + '名称'" v-model="title" @input="checkTitle" :style="{ border: title.length >= fontLimit ? '2px solid red' : '2px solid green' }"/>
     <view v-if="title.length>=fontLimit" style="font-size: 3vw; color: red;">社团名称不能超过50个字符</view>
     <GameJoin v-if="formData.recruitmentType == '团队招募'" @check-is-allow="checkGameName"/>
+    <view class="tip">让我们来填写{{formData.recruitmentType === '社团招募' ? '社团' : '团队'}}的详细介绍吧~</view>
+    <view class="text-box">
+        <textarea
+        class="textarea"
+        />
+    </view>
+
 </view>
 </template>
 
@@ -133,7 +140,7 @@ onMounted(()=>{
     margin-bottom: 3vw;
     .tip{
         font-size: 6vw;
-        margin: 10vw 0;
+        margin: 8vw 0;
     }
     .small-tip{
         font-size: 3.5vw;
@@ -148,5 +155,18 @@ onMounted(()=>{
         border-radius: 1vw;
     }
 }
+.text-box{
+    display: flex;
+    .textarea{
+            white-space: pre-wrap;
+            width: 100%;
+            line-height: 5vw;
+            padding: 2vw;
+            font-size: 3.5vw;
+            border-radius: 1vw;
+            border: 0.6vw solid #098245;
+        }
+}
+
 
 </style>

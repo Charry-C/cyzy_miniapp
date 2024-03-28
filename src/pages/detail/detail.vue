@@ -1,13 +1,18 @@
 <script setup>
 import { onLoad } from "@dcloudio/uni-app"
+
 import {ref} from 'vue'
 import recruitDetail from './Recruit_detail/recruitDetail.vue'
 import meetDetail from './Meet_detail/meetDetail.vue';
-import { useFormStore } from "@/stores/modules/formInfo"
 
 //获取屏幕安全距离
 const {safeAreaInsets}=uni.getSystemInfoSync()
-const mode=useFormStore().mode
+
+let mode=ref()
+onLoad((options)=>{
+    mode.value=options.mode
+})
+
 
 const goBack=()=>{
     uni.navigateBack()
