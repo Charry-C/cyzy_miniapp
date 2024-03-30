@@ -96,9 +96,6 @@ const isAllow=(value)=>{
 
 const editComponent=(val)=>{
 	step.value=val
-	if(step.value==1){
-		formStore.reSet(formStore.formData)
-	}
 }
 
 const sendForm=()=>{

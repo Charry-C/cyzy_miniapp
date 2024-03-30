@@ -1,7 +1,6 @@
 <script setup>
 import {ref,defineEmits,onMounted} from 'vue'
 import {useFormStore} from '@/stores/modules/formInfo'
-
 /**
  * 0：都没选
  * 1：选择社团
@@ -9,17 +8,24 @@ import {useFormStore} from '@/stores/modules/formInfo'
  */
 let kindSelect=ref(0)
 const formData=useFormStore().formData
-
 let props=defineProps(['edit'])
-
 const emit=defineEmits(['get-allow'])
+
 
 //# start-method 
 
 //选择招募类型
 const selectBox=(select)=>{
     console.log(select);
+
     kindSelect.value=select
+
+    // 选择与上一次不相同才reSet
+    if(select!==(formData.recruitmentType=='社团招募'?1:2)){
+        useFormStore().reSet()
+    }
+
+    
     if(select==1){
         formData.recruitmentType='社团招募'
         emit('get-allow',true)
@@ -35,7 +41,6 @@ const selectBox=(select)=>{
 //init
 onMounted(()=>{
     //获取缓存
-    useFormStore().reSet()
     console.log('招募类型组件挂载了');
     if(formData.recruitmentType!==''){
         kindSelect.value = formData.recruitmentType === '社团招募' ? 1 : 2;

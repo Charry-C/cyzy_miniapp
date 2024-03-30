@@ -6,6 +6,7 @@ export const useFormStore=defineStore('form',()=>{
         "recruitmentType": "",
         "clubName": "",
         "gameName":"",
+        "clubDetail":"",
         "clubDescription": [
           {
             "id":1,
