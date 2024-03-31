@@ -39,7 +39,7 @@ onMounted(()=>{
 <template>
     <view class="per-desc-form">
         <topTitle topTitle="现在，来详细介绍一下你自己吧" />
-        <topTitleDesc topTitleDesc="在这里，你可以填写你的个人获奖经历，个人绩点，个人优势等等能更好地展现自己的描述" />
+        <topTitleDesc topTitleDesc="在这里，你可以填写你的业绩，让大家更信任你，更好地选择你" />
         <view class="uni-textarea">
               <textarea class="textarea" v-model="description" @input="checkAllow" :placeholder="formData.applyType=='技术型'?tip1:tip2" ></textarea>
         </view>

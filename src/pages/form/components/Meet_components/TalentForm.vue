@@ -77,7 +77,7 @@ onMounted(()=>{
 </script>
 
 <template>
-    <topTitle top-title="请选择您的技术类型" />
+    <topTitle top-title="请选择您的兼职类型" />
     <view class="talent-card">
 		<view class="title-box">
 			您的期望职位是:

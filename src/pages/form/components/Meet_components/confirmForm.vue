@@ -25,7 +25,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{formData.applyType}}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(1)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(1)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -34,7 +34,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{ formData.applyPosition }}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(2)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(2)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -43,7 +43,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{ formData.perDescription }}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(3)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(3)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -52,7 +52,7 @@ const goEdit=(step)=>{
             <view class="value">
                 {{formData.salary}} RMB
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(4)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(4)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -64,7 +64,7 @@ const goEdit=(step)=>{
                     <view class="form-item-value">{{ item.value }}</view>
                 </template>
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(5)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(5)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -73,7 +73,7 @@ const goEdit=(step)=>{
             <view class="value">
                {{formData.applyCampus}}
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(6)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(6)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
         <view class="form-item">
             <view class="title">
@@ -82,7 +82,7 @@ const goEdit=(step)=>{
             <view class="value" style="margin-top: 3vh;">
               <showTimeVue />
             </view>
-            <view class="edit" :class="editIcon" @click="goEdit(7)"></view>
+            <view class="edit" :class="editIcon" @click="goEdit(7)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
   </view>
 </template>

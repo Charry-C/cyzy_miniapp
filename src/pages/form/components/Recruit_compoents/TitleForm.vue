@@ -7,14 +7,20 @@ const emit=defineEmits(['get-allow'])
 let formData=useFormStore().formData
 
 //# ref-start
-let title=ref('')
+let input=ref({
+    title:"",
+    gameName:"",
+    clubDes:""
+})
+
+
+
 let fontLimit=ref(50)
-let mode=ref(1)
-let clubDetail=ref()
+let mode=ref('mode1')
 
 
 let checkList = reactive({
-        "mode1":[
+        mode1:[
         {
             input: "input1",
             value: false,
@@ -24,7 +30,7 @@ let checkList = reactive({
             value:false
         }
         ],
-        "mode2":[
+        mode2:[
         {
             input: "input1",
             value: false,
@@ -41,15 +47,24 @@ let checkList = reactive({
     })
 
 
-//递归算法检查，检查缓存与填写
+//检查缓存与填写
 const checkGo = (arr) => {
     let flag = true
-    for (let i = 0; i < 3; i++) {
-        if(arr[i].value!=true){
-            flag=false
-            break
+    if(mode.value=='mode1'){
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i].value){
+                let keys=Object.keys(input)[i]
+                Object.values(input)[i]=formData[keys]
+            }else{
+                flag=false
+            }
         }
     }
+
+    if(mode.value=='mode2'){
+        
+    }
+
     return flag
 }
 
@@ -61,80 +76,74 @@ const checkGo = (arr) => {
 //# start-method 
 
 //检查input1框
-const checkTitle=()=>{
+const checkInput1=(inputIndex)=>{
     if(title.value.length>0 ){
         formData.clubName=title.value
-        checkList[0].value=true
+        checkList[mode.value][inputIndex].value=true
  
     }else if(title.value.length>=fontLimit){
         formData.clubName=''
-        checkList[0].value=false
+        checkList[mode.value][inputIndex].value=false
     }else{
-        checkList[0].value=false
+        checkList[mode.value][inputIndex].value=false
     }
+
+
     //检查所有框
-    console.log("checkTitle",checkList[0].value);
-    console.log("checkGo(checkList)",checkGo(checkList));
-    if(checkGo(checkList)){
+    if(checkGo(checkList[mode])){
         emit('get-allow',true)
     }else{
         emit('get-allow',false)
 
     }
-
 }
 
-//检查子input2框
-const checkGameName=(value)=>{
+// //检查子input2框
+const checkInput2=(value)=>{
     console.log("childrenCheck",value);
     if(value){
-        checkList[1].value=true
+        checkList[mode.value][1].value=true
     }else{
-        checkList[1].value=false
+        checkList[mode.value][1].value=false
     }
     //检查所有框
-    if(checkGo(checkList)){
+    if(checkGo(checkList[mode])){
         emit('get-allow',true)
     }else{
         emit('get-allow',false)
     }
 }
 
-//检查input3框
-const checkDetail=()=>{
-    if(clubDetail.value.length>0 ){
+// //检查input3框
+const checkInput3=()=>{
+    const input3=input.clubDes.value
+    if(input3.length>0 ){
         formData.clubDetail=title.value
-        checkList[2].value=true
-    }else if(clubDetail.value.length>=fontLimit){
+        checkList[mode.value][2].value=true
+    }else if(input3.length>=fontLimit){
         formData.clubDetail=''
-        checkList[2].value=false
+        checkList[mode.value][2].value=false
     }else{
-        checkList[2].value=false
+        checkList[mode.value][2].value=false
     }
     //检查所有框
-    if(checkGo(checkList)){
+    if(checkGo(checkList[mode.value])){
         emit('get-allow',true)
     }else{
         emit('get-allow',false)
     }
 }
-
-
 //# end-method
+
 
 //init
 onMounted(()=>{
     console.log('社团名称组件挂在了');
     //检查缓存
-    if(formData.clubName!==''){
-        checkList[0].value=true
-        title.value=formData.clubName
-    }else{
-        checkList[0].value=false
-    }
+
 
     //检查所有框
-    if(checkGo(checkList)){
+    if(checkGo(checkList[mode.value])){
         emit('get-allow',true)
     }
 })
@@ -147,15 +156,17 @@ onMounted(()=>{
     <view class="small-tip">
         请您认真填写，以便审核快速通过~
     </view>
-    <input class="uni-input" :placeholder="'请您填写' + (formData.recruitmentType === '社团招募' ? '社团' : '团队') + '名称'" v-model="title" @input="checkTitle()" :style="{ border: title.length >= fontLimit ? '2px solid red' : '2px solid green' }"/>
+    <input class="uni-input" :placeholder="'请您填写' + (formData.recruitmentType === '社团招募' ? '社团' : '团队') + '名称'" 
+    v-model="input.title" @input="checkInput1" 
+    :style="{ border: title.length >= fontLimit ? '2px solid red' : '2px solid green' }"/>
     <view v-if="title.length>=fontLimit" style="font-size: 3vw; color: red;">社团名称不能超过50个字符</view>
-    <GameJoin v-if="formData.recruitmentType == '团队招募'" @check-is-allow="checkGameName"/>
+    <GameJoin v-if="formData.recruitmentType == '团队招募'" v-model="input.clubDes" />
     <view class="tip">让我们来填写{{formData.recruitmentType === '社团招募' ? '社团' : '团队'}}的详细介绍吧~</view>
     <view class="text-box">
         <textarea
         class="textarea"
-        v-model="clubDetail"
-        @input="checkDetail()"
+        v-model="input.clubDes"
+        @input="checkInput3"
         />
     </view>
 

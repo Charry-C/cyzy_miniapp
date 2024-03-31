@@ -3,6 +3,7 @@ import {ref,onMounted} from 'vue'
 import {useFormStore} from '@/stores/modules/formInfo.js'
 let formData=useFormStore().formData
 const emit=defineEmits(['check-is-allow'])
+const model = defineModel()
 
 let gameName=ref('')
 
@@ -33,7 +34,7 @@ onMounted(()=>{
     <view class="tip">
         请填写队伍要参与的比赛名称
     </view>
-    <input class="uni-input" placeholder="请您填写队伍参与比赛的名称" v-model="gameName" @input="checkInput"/>
+    <input class="uni-input" placeholder="请您填写队伍参与比赛的名称" v-model="model" @input="checkInput"/>
   </view>
 </template>
 
