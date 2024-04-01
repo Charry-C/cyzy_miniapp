@@ -9,8 +9,8 @@ let formData=useFormStore().formData
 //# ref-start
 let input=ref({
     title:"",
-    gameName:"",
-    clubDes:""
+    gameName:"123",
+    clubDes:"342"
 })
 
 
@@ -22,25 +22,25 @@ let mode=ref('mode1')
 let checkList = reactive({
         mode1:[
         {
-            input: "input1",
+            input: "title",
             value: false,
         },
         {
-            input:"input3",
+            input:"clubDes",
             value:false
         }
         ],
         mode2:[
         {
-            input: "input1",
+            input: "title",
             value: false,
         },
         {
-            input: "input2",
+            input: "gameName",
             value: false,
         },
         {
-            input:"input3",
+            input:"clubDes",
             value:false
         }
     ]
@@ -62,7 +62,14 @@ const checkGo = (arr) => {
     }
 
     if(mode.value=='mode2'){
-        
+        for (let i = 0; i < arr.length; i++) {
+            if(arr[i].value){
+                let keys=Object.keys(input)[i]
+                Object.values(input)[i]=formData[keys]
+            }else{
+                flag=false
+            }
+        }
     }
 
     return flag
@@ -77,20 +84,21 @@ const checkGo = (arr) => {
 
 //检查input1框
 const checkInput1=(inputIndex)=>{
-    if(title.value.length>0 ){
-        formData.clubName=title.value
-        checkList[mode.value][inputIndex].value=true
+    const input1=input.value.title
+    if(input1.length>0 ){
+        formData.clubName=input1
+        checkList[mode.value][0].value=true
  
-    }else if(title.value.length>=fontLimit){
+    }else if(input1.length>=fontLimit){
         formData.clubName=''
-        checkList[mode.value][inputIndex].value=false
+        checkList[mode.value][0].value=false
     }else{
-        checkList[mode.value][inputIndex].value=false
+        checkList[mode.value][0].value=false
     }
 
 
     //检查所有框
-    if(checkGo(checkList[mode])){
+    if(checkGo(checkList[mode.value])){
         emit('get-allow',true)
     }else{
         emit('get-allow',false)
@@ -116,15 +124,15 @@ const checkInput2=(value)=>{
 
 // //检查input3框
 const checkInput3=()=>{
-    const input3=input.clubDes.value
+    const input3=input.value.clubDes
     if(input3.length>0 ){
-        formData.clubDetail=title.value
-        checkList[mode.value][2].value=true
+        formData.clubDetail=input3
+        checkList[mode.value][1].value=true
     }else if(input3.length>=fontLimit){
         formData.clubDetail=''
-        checkList[mode.value][2].value=false
+        checkList[mode.value][1].value=false
     }else{
-        checkList[mode.value][2].value=false
+        checkList[mode.value][1].value=false
     }
     //检查所有框
     if(checkGo(checkList[mode.value])){
@@ -158,15 +166,16 @@ onMounted(()=>{
     </view>
     <input class="uni-input" :placeholder="'请您填写' + (formData.recruitmentType === '社团招募' ? '社团' : '团队') + '名称'" 
     v-model="input.title" @input="checkInput1" 
-    :style="{ border: title.length >= fontLimit ? '2px solid red' : '2px solid green' }"/>
-    <view v-if="title.length>=fontLimit" style="font-size: 3vw; color: red;">社团名称不能超过50个字符</view>
-    <GameJoin v-if="formData.recruitmentType == '团队招募'" v-model="input.clubDes" />
+    :style="{ border: input.title.length >= fontLimit ? '2px solid red' : '2px solid green' }"/>
+    <view v-if="input.title.length>=fontLimit" style="font-size: 3vw; color: red;">社团名称不能超过50个字符</view>
+    <GameJoin v-if="formData.recruitmentType == '团队招募'" v-model="input.gameName" />
     <view class="tip">让我们来填写{{formData.recruitmentType === '社团招募' ? '社团' : '团队'}}的详细介绍吧~</view>
     <view class="text-box">
         <textarea
         class="textarea"
         v-model="input.clubDes"
         @input="checkInput3"
+        placeholder="请填写社团的简介"
         />
     </view>
 
