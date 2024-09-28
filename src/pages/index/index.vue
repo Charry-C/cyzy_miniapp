@@ -1,86 +1,62 @@
 <script setup>
-import { onLoad } from "@dcloudio/uni-app"
-import {ref, reactive} from 'vue'
-import { getRecruitCardInfoApi,getMeetCardInfoApi } from "@/api/page_index"
+  import { onLoad } from "@dcloudio/uni-app"
+  import {ref, reactive} from 'vue'
+  import { getRecruitCardInfoApi,getMeetCardInfoApi } from "@/api/page_index"
 
+  // 变量定义
+  const cardData=reactive([])
+  const triggered=ref(false)
+  const tabIndex=ref(0)
+  const currentIndex=ref(0)
 
+  // 获取屏幕安全距离
+  const { safeAreaInsets }=uni.getSystemInfoSync()
 
-//变量定义
-const cardData=reactive([])
-const triggered=ref(false)
-const tabIndex=ref(0)
-const scrollVal=ref(0)
-
-//获取数据函数
-const getRecruitCardInfo=async ()=>{
-  const recruitCardInfo=await getRecruitCardInfoApi()
-  console.log("首页卡片数据",recruitCardInfo.data.data);
-  return recruitCardInfo.data.data
-}
-const getMeetCardInfo=async ()=>{
-  const meetCardInfo=await getMeetCardInfoApi()
-  console.log("首页卡片数据",meetCardInfo.data.data);
-  return meetCardInfo.data.data
-}
-
-
-onLoad(async()=>{
-  const recruitData = await getRecruitCardInfo();
-  const meetDara=await getMeetCardInfo()
-  console.log("recruitData",recruitData,"meetDara",meetDara);
-  cardData.push(...recruitData); // 使用concat方法合并数组
-})
-
-
-
-async function refreshData(){
-  triggered.value=true
-  const data = await getRecruitCardInfo();
-  console.log("data",data);
-  cardData.unshift(...data); 
-  console.log(123);
-  triggered.value=false
-  console.log(triggered.value);
+  // 获取数据函数
+  const getRecruitCardInfo=async ()=>{
+    const recruitCardInfo=await getRecruitCardInfoApi()
+    console.log("首页卡片数据",recruitCardInfo.data.data);
+    return recruitCardInfo.data.data
+  }
+  const getMeetCardInfo=async ()=>{
+    const meetCardInfo=await getMeetCardInfoApi()
+    console.log("首页卡片数据",meetCardInfo.data.data);
+    return meetCardInfo.data.data
   }
 
+  // 刷新数据
+  async function refreshData(){
+    triggered.value=true
+    const data = await getRecruitCardInfo();
+    console.log("data",data);
+    cardData.unshift(...data);
+    console.log(123);
+    triggered.value=false
+    console.log(triggered.value);
+  }
 
+  // swiper切换 与 tab切换对应逻辑
+  function changeTab(tab){
+    tabIndex.value=tab
+    currentIndex.value = tabIndex.value
+  }
+  function onSwiperChange(event){
+      let { current } = event.target
+      tabIndex.value = current
+  }
 
-//获取屏幕安全距离
-const {safeAreaInsets}=uni.getSystemInfoSync()
-console.log(safeAreaInsets);
-
-
-
-function changeTab(tab){
-  tabIndex.value=tab
-  scrollVal.value=tab*uni.getWindowInfo().screenWidth
-}
-
-// function scroll(e) {
-//   const w=uni.getWindowInfo().screenWidth
-//   console.log(e.detail);
-//     if(e.detail.deltaX<0 && e.detail.scrollLeft>120){
-//       changeTab(1)
-//       console.log(11111);
-//     }else if(e.detail.deltaX<0 && e.detail.scrollLeft<=120){
-//       changeTab(0)
-//       console.log(2222);
-
-//     }
-//     if(e.detail.deltaX>0 && e.detail.scrollLeft>153){
-//       changeTab(1)
-//       console.log(3333);
-//     }else if(e.detail.deltaX>0 && e.detail.scrollLeft<=153){
-//       changeTab(0)
-//       console.log(4444);
-
-//     }
-// 	}
-
+  // 前往卡片详情页
   const goDetail=(mode)=>{
     uni.navigateTo({ url:'../detail/detail?mode='+mode})
   }
 
+  // 进入小程序获取数据
+  onLoad(async()=>{
+    const recruitData = await getRecruitCardInfo();
+    const meetData=await getMeetCardInfo()
+    console.log("recruitData",recruitData,"meetData",meetData);
+    cardData.push(...recruitData); // 使用concat方法合并数组
+  })
 </script>
 
 <template>
@@ -94,8 +70,14 @@ function changeTab(tab){
         <view @click="changeTab(0)"  :class="{ 'selected': tabIndex === 0 }">遇知音</view>
         <view @click="changeTab(1)" :class="{ 'selected': tabIndex === 1 }">寻财才</view>
     </view>
-    <scroll-view  class="scroll-view_H con-box" show-scrollbar="false" scroll-with-animation="true" scroll-x="true"   :scroll-left="scrollVal" >
-              <view id="demo1" class="scroll-view-item_H" >
+    <scroll-view  class="scroll-view_H con-box">
+      <swiper class="swiper"
+          :duration="200"
+          :current = "currentIndex"
+          @change="onSwiperChange"
+          >
+          <swiper-item>
+            <view id="demo1" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled @refresherrefresh="refreshData(0)" :refresher-triggered="triggered">
                   <view class="card" v-for="info in cardData" :key="info.recruit_card_id">
                     <view class="title">{{info.title}}</view>
@@ -162,10 +144,11 @@ function changeTab(tab){
                   </view>
                 </scroll-view>
               </view>
-
-              <view id="demo2" class="scroll-view-item_H" >
+          </swiper-item>
+          <swiper-item>
+            <view id="demo2" class="scroll-view-item_H" >
                 <scroll-view class="tab-con" scroll-y="true" refresher-enabled>
-                  
+
                   <view class="card"  @click="goDetail(2)">
                     <view class="title">前端开发工程师</view>
                     <view class="kind">技术者</view>
@@ -212,10 +195,9 @@ function changeTab(tab){
                   </view>
                 </scroll-view>
               </view>
-      </scroll-view>
-
-
-
+          </swiper-item>
+        </swiper>
+    </scroll-view>
 </template>
 
 <style lang="scss">
@@ -237,6 +219,8 @@ page{
 .selected{
   padding-bottom: 0.5vh;
   border-bottom: 1vw solid #22d3ff;
+  border-radius: 0.5vw;
+  color: #22d3ff;
 }
 
 
@@ -259,12 +243,18 @@ page{
     font-weight: bolder;
         }
 
+.con-box{
+  scroll-snap-type: both mandatory;
+}
 
 .con-box,
 .scroll-view_H{
   white-space: nowrap;
 		width: 100%;
 	.scroll-view-item_H {
+    scroll-snap-stop: normal;
+    scroll-snap-align: center;
+
     display: inline-block;
 		width: 100%;
     height: 100%;
