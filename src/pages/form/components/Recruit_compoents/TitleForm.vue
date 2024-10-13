@@ -10,17 +10,17 @@ let formData = useFormStore().formData
 let mode = ref(formData.recruitmentType==='社团招募'?'mode1':'mode2')
 let inputList = reactive({
   mode1: {
-      GroupName: {
+      groupName: {
           val: '',
           go: false,
       },
-      GroupIntro:{
+      groupIntro:{
         val: '',
         go: false,
       },
   },
   mode2: {
-      GroupName: {
+      groupName: {
         val: '',
         go: false,
       },
@@ -28,7 +28,7 @@ let inputList = reactive({
         val: '',
         go: false,
       },
-      GroupIntro: {
+      groupIntro: {
         val: '',
         go: false
       }
@@ -96,11 +96,11 @@ onMounted(() => {
       :placeholder="
         '请您填写' + (formData.recruitmentType === '社团招募' ? '社团' : '团队') + '名称'
       "
-      v-model="inputList[mode]['GroupName'].val"
-      @input="checkInput(inputList[mode]['GroupName'], 50)"
-      :style=" inputList[mode]['GroupName'].go ? {border: '2px solid green'} : {border: '2px solid gray'} "
+      v-model="inputList[mode]['groupName'].val"
+      @input="checkInput(inputList[mode]['groupName'], 50)"
+      :style=" inputList[mode]['groupName'].go ? {border: '2px solid green'} : {border: '2px solid gray'} "
     />
-    <view v-if="inputList[mode]['GroupName'].val.length > 50" style="font-size: 3vw; color: red">
+    <view v-if="inputList[mode]['groupName'].val.length > 50" style="font-size: 3vw; color: red">
       社团名称不能超过50个字符
     </view>
     <template v-if="formData.recruitmentType === '团队招募'">
@@ -122,10 +122,10 @@ onMounted(() => {
     <view class="text-box">
       <textarea
         class="textarea"
-        v-model="inputList[mode]['GroupIntro'].val"
-        @input="checkInput(inputList[mode]['GroupIntro'],50)"
+        v-model="inputList[mode]['groupIntro'].val"
+        @input="checkInput(inputList[mode]['groupIntro'],50)"
         placeholder="请填写社团的简介"
-        :style=" inputList[mode]['GroupIntro'].go ? {border: '2px solid green'} : {border: '2px solid gray'} "
+        :style=" inputList[mode]['groupIntro'].go ? {border: '2px solid green'} : {border: '2px solid gray'} "
       />
     </view>
   </view>

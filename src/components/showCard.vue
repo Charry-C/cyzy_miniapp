@@ -7,7 +7,7 @@ const props = defineProps({
 })
 // 前往卡片详情页
 function goDetail(mode) {
-  uni.navigateTo({ url: '../detail/detail?mode=' + mode })
+  uni.navigateTo({ url: '/pages/detail/detail?mode=' + mode })
 }
 
 </script>

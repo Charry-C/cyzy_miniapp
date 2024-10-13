@@ -12,7 +12,7 @@ let props=defineProps(['edit'])
 const emit=defineEmits(['get-allow'])
 
 
-//# start-method 
+//# start-method
 
 //选择招募类型
 const selectBox=(select)=>{
@@ -25,7 +25,7 @@ const selectBox=(select)=>{
         useFormStore().reSet()
     }
 
-    
+
     if(select==1){
         formData.recruitmentType='社团招募'
         emit('get-allow',true)

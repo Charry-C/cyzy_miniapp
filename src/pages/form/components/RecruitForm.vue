@@ -68,7 +68,7 @@ const goNext=()=>{
 			return e.allowNext==true
 		})
 	}
-	
+
 	if(allowList[step.value-1].allowNext){
 		step.value = step.value+1;
 	}
@@ -126,7 +126,7 @@ const sendForm=()=>{
 <template>
 	<view class="form">
 		<formTop :step="step" :step-sum="stepSum" :kind="kind"/>
-	
+
 		<view class="form-con">
 				<KindSelect @get-allow="isAllow" @edit-componet="editComponent" v-if="step===1"/>
 				<TitleForm @get-allow="isAllow" @edit-componet="editComponent" v-if="step===2"/>

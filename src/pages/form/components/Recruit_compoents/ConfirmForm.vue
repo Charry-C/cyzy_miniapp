@@ -80,11 +80,11 @@ const goEdit=(step)=>{
             <view class="value">
                 <view class="time">
                     <view class="form-item-title">开始时间</view>
-                    <view class="form-item-value">{{ formData.recruitmentPeriod.startDate }}</view>    
+                    <view class="form-item-value">{{ formData.recruitmentPeriod.startDate }}</view>
                 </view>
                 <view class="time">
                     <view class="form-item-title">结束时间</view>
-                    <view class="form-item-value">{{ formData.recruitmentPeriod.endDate }}</view>    
+                    <view class="form-item-value">{{ formData.recruitmentPeriod.endDate }}</view>
                 </view>
             </view>
             <view class="edit" :class="editIcon" @click="goEdit(6)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
@@ -114,7 +114,7 @@ const goEdit=(step)=>{
             </view>
             <view class="edit" :class="editIcon" @click="goEdit(8)"><uni-icons type="compose" color="#fff" size="20"></uni-icons></view>
         </view>
-        
+
     </view>
   </view>
 </template>

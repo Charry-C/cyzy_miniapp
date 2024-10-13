@@ -17,41 +17,7 @@ const formData=useFormStore()
 let step=ref(1)
 let stepSum=ref(8)
 let kind=ref('求职发布')
-let allowList=reactive([
-	{
-		step:"step1",
-		value:false
-	},
-	{
-		step:"step2",
-		value:false
-	},
-	{
-		step:"step13",
-		value:false
-	},
-	{
-		step:"step4",
-		value:false
-	},
-	{
-		step:"step5",
-		value:false
-	},
-	{
-		step:"step6",
-		value:false
-	},
-	{
-		step:"step7",
-		value:false
-	},
-	{
-		step:"step8",
-		value:false
-	},
-
-])
+let allowList=reactive(Array(8).fill().map(_ => ({value:false})))
 
 //# region method
 const goNext=()=>{
@@ -79,7 +45,7 @@ const editComponet=(value)=>{
 
 const allowNext=(isAllow)=>{
 	allowList[step.value-1].value=isAllow
-	
+
 	//判断confirm表达前的所有表单是否都为true
 	let flag=true
 	for (let i = 0; i < allowList.length-1; i++) {
@@ -97,22 +63,20 @@ const allowNext=(isAllow)=>{
 <template>
     <formTop :step="step" :step-sum="stepSum" :kind="kind"/>
     <view class="con">
-		<clubDes />
-		<typeSelect v-if="step==1" @allow-next="allowNext" />
-        <TalentForm v-if="step==2" @allow-next="allowNext"/>
-		<perDesc v-if="step==3" @allow-next="allowNext" />
-		<salaryForm v-if="step==4" @allow-next="allowNext"/>
-        <PersonalContact v-if="step==5" @allow-next="allowNext" />
-		<campusSelect v-if="step==6" @allow-next="allowNext" />
-		<freeTime v-if="step==7" @allow-next="allowNext"/>
-		<confirmForm v-if="step==8" @edit-componet="editComponet" @allow-next="allowNext" />
+		  <typeSelect v-if="step==1" @allow-next="allowNext" />
+      <TalentForm v-if="step==2" @allow-next="allowNext"/>
+      <perDesc v-if="step==3" @allow-next="allowNext" />
+      <salaryForm v-if="step==4" @allow-next="allowNext"/>
+      <PersonalContact v-if="step==5" @allow-next="allowNext" />
+      <campusSelect v-if="step==6" @allow-next="allowNext" />
+      <freeTime v-if="step==7" @allow-next="allowNext"/>
+      <confirmForm v-if="step==8" @edit-componet="editComponet" @allow-next="allowNext" />
     </view>
     <view class="bottom-step">
 			<formProgress :step="step" :step-sum="stepSum" />
 			<view class="step-box">
 				<view class="back bottom-btn" @click="goBack" >BACK</view>
 				<view class="next bottom-btn" @click="goNext" :class="{'disabled':!allowList[step-1].value}">NEXT</view>
-				
 			</view>
 		</view>
 </template>

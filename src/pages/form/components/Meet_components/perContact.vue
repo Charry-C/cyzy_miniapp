@@ -81,7 +81,7 @@ const initItem=()=>{
                 type--
                 break
             }
-        }    
+        }
 
     }
 
@@ -111,7 +111,7 @@ onMounted(() => {
     display: flex;
     justify-content: space-evenly;
     margin: 5vw 0;
-    padding-bottom: 15vh;
+    padding-bottom: 5vh;
     .contact-icon{
         width: 15vw;
         height: 15vw;
