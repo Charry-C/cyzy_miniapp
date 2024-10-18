@@ -15,9 +15,9 @@
 
 ## 资料说明
 
-### 📀 视频学习
+### 运行截图
+<img width="1059" alt="image" src="https://github.com/user-attachments/assets/796ca4c1-ee50-4f10-aede-4700b88bf5d8">
 
-[https://www.bilibili.com/video/BV1Bp4y1379L/](https://www.bilibili.com/video/BV1Bp4y1379L/?share_source=copy_web&vd_source=2ac50d29193927b3c8597537dc4bc81d)
 
 ### 📗 接口文档
 
